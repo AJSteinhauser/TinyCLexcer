@@ -1,0 +1,12 @@
+
+
+
+To compile code:
+   make
+
+To execute lexer on hello world program
+   make run
+
+To execute lexer on custom TinyC program
+   ./bin/scanner.out <file.c>
+

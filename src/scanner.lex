@@ -46,6 +46,6 @@ int main(int argc, char* argv[]) {
     if (argc == 2 && (fh = fopen(argv[1], "r")))
         yyin = fh;
     yylex();
-    printf("%d",token_count);
+    printf("\nTokens in %s: %d\n",argv[1],token_count);
     return 0;
 }
