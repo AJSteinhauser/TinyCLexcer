@@ -8,6 +8,8 @@ run:
 	make
 	./bin/scanner.out < sample_inputs/sample1.c
 
-makemore:
+maketest:
 	lex -o src/lex.yy.c src/scanner.lex
-	gcc -ll -o bin/scanner.out src/lex.yy.c 
+	gcc -o bin/scanner.out src/lex.yy.c 
+maketestrun:
+	./bin/scanner.out sample_inputs/sample1.c
