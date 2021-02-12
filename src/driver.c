@@ -5,15 +5,17 @@
 extern int yylex();
 extern int yylineno;
 extern char* yyttext;
-
+//extern FILE* yyin;
 
 int main(void){
 
-  int name_token, value_token;
-  name_token = yylex();
-  while (name_token){
-    printf("%d\n",name_token);
-    name_token = yylex();
+  //yyin = fopen("../sample_inputs.sample1.c","r");
+  int ntoke;
+  ntoke = yylex();
+  printf("%d\n",ntoke);
+  while (1){
+    printf("%d\n",ntoke);
+    ntoke = yylex();
   }
   return 0;
 }

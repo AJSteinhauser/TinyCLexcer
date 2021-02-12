@@ -167,7 +167,20 @@ extern FILE *yyin, *yyout;
 #define EOB_ACT_END_OF_FILE 1
 #define EOB_ACT_LAST_MATCH 2
 
-    #define YY_LESS_LINENO(n)
+    /* Note: We specifically omit the test for yy_rule_can_match_eol because it requires
+     *       access to the local variable yy_act. Since yyless() is a macro, it would break
+     *       existing scanners that call yyless() from OUTSIDE yylex. 
+     *       One obvious solution it to make yy_act a global. I tried that, and saw
+     *       a 5% performance hit in a non-yylineno scanner, because yy_act is
+     *       normally declared as a register variable-- so it is not worth it.
+     */
+    #define  YY_LESS_LINENO(n) \
+            do { \
+                yy_size_t yyl;\
+                for ( yyl = n; yyl < yyleng; ++yyl )\
+                    if ( yytext[yyl] == '\n' )\
+                        --yylineno;\
+            }while(0)
     
 /* Return all but the first "n" matched characters back to the input stream. */
 #define yyless(n) \
@@ -455,6 +468,12 @@ static yyconst flex_int16_t yy_chk[69] =
        38,   38,   38,   38,   38,   38,   38,   38
     } ;
 
+/* Table of booleans, true if rule could match eol. */
+static yyconst flex_int32_t yy_rule_can_match_eol[26] =
+    {   0,
+0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0,     };
+
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
 
@@ -471,9 +490,9 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "src/scanner.lex"
 #line 5 "src/scanner.lex"
-	int token_count = 0;	
-
-#line 477 "src/lex.yy.c"
+  int token_count = 0;	
+	
+#line 496 "src/lex.yy.c"
 
 #define INITIAL 0
 
@@ -532,8 +551,6 @@ extern int yywrap (void );
 #endif
 #endif
 
-    static void yyunput (int c,char *buf_ptr  );
-    
 #ifndef yytext_ptr
 static void yy_flex_strncpy (char *,yyconst char *,int );
 #endif
@@ -655,9 +672,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 9 "src/scanner.lex"
+#line 11 "src/scanner.lex"
 
-#line 661 "src/lex.yy.c"
+#line 678 "src/lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -729,6 +746,16 @@ yy_find_action:
 
 		YY_DO_BEFORE_ACTION;
 
+		if ( yy_act != YY_END_OF_BUFFER && yy_rule_can_match_eol[yy_act] )
+			{
+			yy_size_t yyl;
+			for ( yyl = 0; yyl < yyleng; ++yyl )
+				if ( yytext[yyl] == '\n' )
+					   
+    yylineno++;
+;
+			}
+
 do_action:	/* This label is used only to access EOF actions. */
 
 		switch ( yy_act )
@@ -742,131 +769,131 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 10 "src/scanner.lex"
+#line 12 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 11 "src/scanner.lex"
+#line 13 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 12 "src/scanner.lex"
+#line 14 "src/scanner.lex"
 ;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 13 "src/scanner.lex"
+#line 15 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 14 "src/scanner.lex"
+#line 16 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 15 "src/scanner.lex"
+#line 17 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 16 "src/scanner.lex"
+#line 18 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 17 "src/scanner.lex"
+#line 19 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 18 "src/scanner.lex"
+#line 20 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 19 "src/scanner.lex"
+#line 21 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 20 "src/scanner.lex"
+#line 22 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 21 "src/scanner.lex"
+#line 23 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 22 "src/scanner.lex"
+#line 24 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 23 "src/scanner.lex"
+#line 25 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 24 "src/scanner.lex"
+#line 26 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 25 "src/scanner.lex"
+#line 27 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 26 "src/scanner.lex"
+#line 28 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 27 "src/scanner.lex"
+#line 29 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 28 "src/scanner.lex"
+#line 30 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 29 "src/scanner.lex"
+#line 31 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 30 "src/scanner.lex"
+#line 32 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 31 "src/scanner.lex"
+#line 33 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 32 "src/scanner.lex"
+#line 34 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 33 "src/scanner.lex"
+#line 35 "src/scanner.lex"
 token_count++;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 34 "src/scanner.lex"
+#line 36 "src/scanner.lex"
 ECHO;
 	YY_BREAK
-#line 870 "src/lex.yy.c"
+#line 897 "src/lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1195,43 +1222,6 @@ static int yy_get_next_buffer (void)
 	return yy_is_jam ? 0 : yy_current_state;
 }
 
-    static void yyunput (int c, register char * yy_bp )
-{
-	register char *yy_cp;
-    
-    yy_cp = (yy_c_buf_p);
-
-	/* undo effects of setting up yytext */
-	*yy_cp = (yy_hold_char);
-
-	if ( yy_cp < YY_CURRENT_BUFFER_LVALUE->yy_ch_buf + 2 )
-		{ /* need to shift things up to make room */
-		/* +2 for EOB chars. */
-		register yy_size_t number_to_move = (yy_n_chars) + 2;
-		register char *dest = &YY_CURRENT_BUFFER_LVALUE->yy_ch_buf[
-					YY_CURRENT_BUFFER_LVALUE->yy_buf_size + 2];
-		register char *source =
-				&YY_CURRENT_BUFFER_LVALUE->yy_ch_buf[number_to_move];
-
-		while ( source > YY_CURRENT_BUFFER_LVALUE->yy_ch_buf )
-			*--dest = *--source;
-
-		yy_cp += (int) (dest - source);
-		yy_bp += (int) (dest - source);
-		YY_CURRENT_BUFFER_LVALUE->yy_n_chars =
-			(yy_n_chars) = YY_CURRENT_BUFFER_LVALUE->yy_buf_size;
-
-		if ( yy_cp < YY_CURRENT_BUFFER_LVALUE->yy_ch_buf + 2 )
-			YY_FATAL_ERROR( "flex scanner push-back overflow" );
-		}
-
-	*--yy_cp = (char) c;
-
-	(yytext_ptr) = yy_bp;
-	(yy_hold_char) = *yy_cp;
-	(yy_c_buf_p) = yy_cp;
-}
-
 #ifndef YY_NO_INPUT
 #ifdef __cplusplus
     static int yyinput (void)
@@ -1301,6 +1291,11 @@ static int yy_get_next_buffer (void)
 	c = *(unsigned char *) (yy_c_buf_p);	/* cast for 8-bit char's */
 	*(yy_c_buf_p) = '\0';	/* preserve yytext */
 	(yy_hold_char) = *++(yy_c_buf_p);
+
+	if ( c == '\n' )
+		   
+    yylineno++;
+;
 
 	return c;
 }
@@ -1771,6 +1766,9 @@ static int yy_init_globals (void)
      * This function is called from yylex_destroy(), so don't allocate here.
      */
 
+    /* We do not touch yylineno unless the option is enabled. */
+    yylineno =  1;
+    
     (yy_buffer_stack) = 0;
     (yy_buffer_stack_top) = 0;
     (yy_buffer_stack_max) = 0;
@@ -1863,12 +1861,22 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 34 "src/scanner.lex"
+#line 36 "src/scanner.lex"
 
 
 
 
-int yywrap(){
-	return 1;
+int yywrap(void){
+  return 1;
+}
+
+int main(int argc, char* argv[]) {
+    FILE *fh;
+
+    if (argc == 2 && (fh = fopen(argv[1], "r")))
+        yyin = fh;
+    yylex();
+    printf("%d",token_count);
+    return 0;
 }
 

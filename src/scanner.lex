@@ -2,9 +2,11 @@
 
 
 %{
-	int token_count = 0;	
-
+  int token_count = 0;	
+	
 %}
+
+%option nounput yylineno
 
 %%
 [a-zA-Z_][a-zA-Z0-9_]*	token_count++;
@@ -34,6 +36,16 @@
 %%
 
 
-int yywrap(){
-	return 1;
+int yywrap(void){
+  return 1;
+}
+
+int main(int argc, char* argv[]) {
+    FILE *fh;
+
+    if (argc == 2 && (fh = fopen(argv[1], "r")))
+        yyin = fh;
+    yylex();
+    printf("%d",token_count);
+    return 0;
 }
