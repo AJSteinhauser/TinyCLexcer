@@ -10,3 +10,5 @@ code_example = open("sample_inputs/sample1.c").read()
 tokenized = tokenizer.tokenize(code_example)
 
 print(tokenized)
+
+print(len(tokenized));
