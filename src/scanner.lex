@@ -21,6 +21,9 @@
 "!="	token_count++;
 "+" token_count++;
 "-" token_count++;
+"#"	token_count++;
+"<"	token_count++;
+">"	token_count++;
 "*"	token_count++;
 ","	token_count++;
 "/" token_count++;

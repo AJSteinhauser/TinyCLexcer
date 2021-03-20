@@ -48,6 +48,8 @@ def getNextExpectedDoubleChar(char):
 
 file = open(sys.argv[1], "r").read();
 
+print(sys.argv[1]);
+
 currentToken = "";
 tokens = []
 quoteMode = False;
