@@ -1,12 +1,23 @@
 
+##Project 2
+
+   To compile bison code:
+      make bison
+
+   To execute bison parser on hello world program
+      make runbison
+
+   To execute parser on custom TinyC program
+      ./bin 
 
 
-To compile code:
-   make
+##Project 1
+   To compile lexer code:
+      make lex
 
-To execute lexer on hello world program
-   make run
+   To execute lexer on hello world program
+      make runlex
 
-To execute lexer on custom TinyC program
-   ./bin/scanner.out <file.c>
+   To execute lexer on custom TinyC program
+      ./bin/scanner.out <file.c>
 

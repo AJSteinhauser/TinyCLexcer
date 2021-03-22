@@ -2,53 +2,60 @@
 
 
 %{
-  int token_count = 0;	
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include "parser.tab.h" // generated via -d
 	
 %}
 
-%option nounput yylineno
+%option noyywrap
+%option yylineno
+
+%%	
+"void"			|
+"int"			|
+"char"			|
+"float"			|
+"void*"         |
+"int*"          |
+"char*"         |
+"float*"					{return TYPE;}
+
+"include"					{return INCLUDE;}
+"return"					{return RETURN;}
+"if"						{return IF_STATEMENT;}
+"else"						{return ELSE_STATEMENT;}
+"for"						{return FOR_STATEMENT;}
+
+[a-zA-Z_]+[a-zA-Z0-9_]*		{return IDENTIFIER;}
+[-+]?[0-9]+					{return INT_VALUE;}
+[-+]?[0-9]*\.?[0-9]+		{return FLOAT_VALUE;}
+["].*["]					{return STRING;}
+"=" 						{return ASSIGNMENT;}
+"=="						{return EQUALS;}
+">="						{return GREATER_THAN_EQUALS;}
+['][.]['] 					{;}
+"<="						{return LESS_THAN_EQUALS;}
+"!="						{return NOT_EQUALS;}
+"+" 						{;}
+"-" 						{;}
+"#"							{return HASHTAG;}
+"<"							{return LEFT_TRI;}
+">"							{return RIGHT_TRI;}
+"*"							{;}
+","							{return COMMA;}
+"/" 						{;}
+"|" 						{;}
+";"							{return SEMI_COLON;}
+"{"							{return OPEN_BRACKET;}
+"}"							{return CLOSE_BRACKET;}
+"("							{return OPEN_PAR;}
+")"							{return CLOSE_PAR;}
+"&"							{;}
+"."							{return PERIOD;}
+"%"							{;}
+[ \t\n]
 
 %%
-[a-zA-Z_][a-zA-Z0-9_]*	token_count++;
-[0-9]*	token_count++;
-[ \t\n]	;
-["].*["]	token_count++;
-"=" token_count++;
-"=="	token_count++;
-">="	token_count++;
-['][.]['] token_count++;
-"<="	token_count++;
-"!="	token_count++;
-"+" token_count++;
-"-" token_count++;
-"#"	token_count++;
-"<"	token_count++;
-">"	token_count++;
-"*"	token_count++;
-","	token_count++;
-"/" token_count++;
-"|" token_count++;
-";"	token_count++;
-"{"	token_count++;
-"}"	token_count++;
-"("	token_count++;
-")"	token_count++;
-"&"	token_count++;
-"."	token_count++;
-"%"	token_count++;
-%%
 
 
-int yywrap(void){
-  return 1;
-}
-
-int main(int argc, char* argv[]) {
-    FILE *fh;
-
-    if (argc == 2 && (fh = fopen(argv[1], "r")))
-        yyin = fh;
-    yylex();
-    printf("\nTokens in %s: %d\n",argv[1],token_count);
-    return 0;
-}

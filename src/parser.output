@@ -1,0 +1,1132 @@
+Useless nonterminals
+
+   EVALUATION
+
+
+Useless rules
+
+   49 EVALUATION: /* empty */
+
+
+State 84 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: DECLARATION $end
+
+    1 DECLARATION: EXPRESSION SEMI_COLON
+    2            | DECLARATION EXPRESSION SEMI_COLON
+    3            | FUNCTION_DEC
+    4            | DECLARATION FUNCTION_DEC
+    5            | HEADER
+    6            | FUNCTION_CALL
+    7            | RETURN_RULE SEMI_COLON
+    8            | DECLARATION RETURN_RULE SEMI_COLON
+    9            | IF
+   10            | IF ELSE
+   11            | DECLARATION IF
+   12            | DECLARATION IF ELSE
+   13            | FOR
+   14            | DECLARATION FOR
+
+   15 HEADER: HASHTAG INCLUDE STRING
+   16       | HASHTAG INCLUDE LEFT_TRI IDENTIFIER PERIOD IDENTIFIER RIGHT_TRI
+
+   17 EXPRESSION: TYPE IDENTIFIER ASSIGNMENT NUMBER
+   18           | TYPE IDENTIFIER ASSIGNMENT IDENTIFIER
+   19           | IDENTIFIER ASSIGNMENT IDENTIFIER
+   20           | IDENTIFIER ASSIGNMENT NUMBER
+   21           | TYPE IDENTIFIER
+
+   22 RETURN_RULE: RETURN
+   23            | RETURN NUMBER
+   24            | RETURN FUNCTION_CALL
+   25            | RETURN IDENTIFIER
+
+   26 FUNCTION_DEC: EXPRESSION PARAMATER_CONTAINER OPEN_BRACKET DECLARATION CLOSE_BRACKET
+   27             | EXPRESSION PARAMATER_CONTAINER SEMI_COLON
+
+   28 FUNCTION_CALL: IDENTIFIER OPEN_PAR CALL_LIST CLOSE_PAR SEMI_COLON
+
+   29 CALL_LIST: CALL_LIST COMMA CALL_LIST
+   30          | NUMBER
+
+   31 PARAMATER_CONTAINER: OPEN_PAR EXPRESSION COMMA EXPRESSION CLOSE_PAR
+   32                    | OPEN_PAR CLOSE_PAR
+
+   33 IF: IF_STATEMENT OPEN_PAR COMPARISON CLOSE_PAR OPEN_BRACKET DECLARATION CLOSE_BRACKET
+
+   34 ELSE: ELSE_STATEMENT OPEN_BRACKET DECLARATION CLOSE_BRACKET
+
+   35 FOR: FOR_STATEMENT OPEN_PAR EXPRESSION SEMI_COLON COMPARISON SEMI_COLON EXPRESSION CLOSE_PAR OPEN_BRACKET DECLARATION CLOSE_BRACKET
+
+   36 COMPARISON: IDENTIFIER COMPARATOR IDENTIFIER
+   37           | IDENTIFIER COMPARATOR NUMBER
+   38           | NUMBER COMPARATOR IDENTIFIER
+
+   39 COMPARATOR: EQUALS
+   40           | NOT_EQUALS
+   41           | GREATER_THAN_EQUALS
+   42           | LESS_THAN_EQUALS
+   43           | LEFT_TRI
+   44           | RIGHT_TRI
+
+   45 NUMBER: INT_VALUE
+   46       | FLOAT_VALUE
+   47       | CHAR_VALUE
+   48       | STRING
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+EQUALS (258) 39
+LESS_THAN_EQUALS (259) 42
+GREATER_THAN_EQUALS (260) 41
+NOT_EQUALS (261) 40
+COMMA (262) 29 31
+ASSIGNMENT (263) 17 18 19 20
+SEMI_COLON (264) 1 2 7 8 27 28 35
+PERIOD (265) 16
+OPEN_BRACKET (266) 26 33 34 35
+CLOSE_BRACKET (267) 26 33 34 35
+OPEN_PAR (268) 28 31 32 33 35
+CLOSE_PAR (269) 28 31 32 33 35
+LEFT_TRI (270) 16 43
+RIGHT_TRI (271) 16 44
+HASHTAG (272) 15 16
+INCLUDE (273) 15 16
+RETURN (274) 22 23 24 25
+IF_STATEMENT (275) 33
+ELSE_STATEMENT (276) 34
+FOR_STATEMENT (277) 35
+FLOAT_VALUE (278) 46
+INT_VALUE (279) 45
+CHAR_VALUE (280) 47
+IDENTIFIER (281) 16 17 18 19 20 21 25 28 36 37 38
+TYPE (282) 17 18 21
+STRING (283) 15 48
+
+
+Nonterminals, with rules where they appear
+
+$accept (29)
+    on left: 0
+DECLARATION (30)
+    on left: 1 2 3 4 5 6 7 8 9 10 11 12 13 14, on right: 0 2 4 8 11
+    12 14 26 33 34 35
+HEADER (31)
+    on left: 15 16, on right: 5
+EXPRESSION (32)
+    on left: 17 18 19 20 21, on right: 1 2 26 27 31 35
+RETURN_RULE (33)
+    on left: 22 23 24 25, on right: 7 8
+FUNCTION_DEC (34)
+    on left: 26 27, on right: 3 4
+FUNCTION_CALL (35)
+    on left: 28, on right: 6 24
+CALL_LIST (36)
+    on left: 29 30, on right: 28 29
+PARAMATER_CONTAINER (37)
+    on left: 31 32, on right: 26 27
+IF (38)
+    on left: 33, on right: 9 10 11 12
+ELSE (39)
+    on left: 34, on right: 10 12
+FOR (40)
+    on left: 35, on right: 13 14
+COMPARISON (41)
+    on left: 36 37 38, on right: 33 35
+COMPARATOR (42)
+    on left: 39 40 41 42 43 44, on right: 36 37 38
+NUMBER (43)
+    on left: 45 46 47 48, on right: 17 20 23 30 37 38
+
+
+state 0
+
+    0 $accept: . DECLARATION $end
+
+    HASHTAG        shift, and go to state 1
+    RETURN         shift, and go to state 2
+    IF_STATEMENT   shift, and go to state 3
+    FOR_STATEMENT  shift, and go to state 4
+    IDENTIFIER     shift, and go to state 5
+    TYPE           shift, and go to state 6
+
+    DECLARATION    go to state 7
+    HEADER         go to state 8
+    EXPRESSION     go to state 9
+    RETURN_RULE    go to state 10
+    FUNCTION_DEC   go to state 11
+    FUNCTION_CALL  go to state 12
+    IF             go to state 13
+    FOR            go to state 14
+
+
+state 1
+
+   15 HEADER: HASHTAG . INCLUDE STRING
+   16       | HASHTAG . INCLUDE LEFT_TRI IDENTIFIER PERIOD IDENTIFIER RIGHT_TRI
+
+    INCLUDE  shift, and go to state 15
+
+
+state 2
+
+   22 RETURN_RULE: RETURN .
+   23            | RETURN . NUMBER
+   24            | RETURN . FUNCTION_CALL
+   25            | RETURN . IDENTIFIER
+
+    FLOAT_VALUE  shift, and go to state 16
+    INT_VALUE    shift, and go to state 17
+    CHAR_VALUE   shift, and go to state 18
+    IDENTIFIER   shift, and go to state 19
+    STRING       shift, and go to state 20
+
+    $default  reduce using rule 22 (RETURN_RULE)
+
+    FUNCTION_CALL  go to state 21
+    NUMBER         go to state 22
+
+
+state 3
+
+   33 IF: IF_STATEMENT . OPEN_PAR COMPARISON CLOSE_PAR OPEN_BRACKET DECLARATION CLOSE_BRACKET
+
+    OPEN_PAR  shift, and go to state 23
+
+
+state 4
+
+   35 FOR: FOR_STATEMENT . OPEN_PAR EXPRESSION SEMI_COLON COMPARISON SEMI_COLON EXPRESSION CLOSE_PAR OPEN_BRACKET DECLARATION CLOSE_BRACKET
+
+    OPEN_PAR  shift, and go to state 24
+
+
+state 5
+
+   19 EXPRESSION: IDENTIFIER . ASSIGNMENT IDENTIFIER
+   20           | IDENTIFIER . ASSIGNMENT NUMBER
+   28 FUNCTION_CALL: IDENTIFIER . OPEN_PAR CALL_LIST CLOSE_PAR SEMI_COLON
+
+    ASSIGNMENT  shift, and go to state 25
+    OPEN_PAR    shift, and go to state 26
+
+
+state 6
+
+   17 EXPRESSION: TYPE . IDENTIFIER ASSIGNMENT NUMBER
+   18           | TYPE . IDENTIFIER ASSIGNMENT IDENTIFIER
+   21           | TYPE . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 27
+
+
+state 7
+
+    0 $accept: DECLARATION . $end
+    2 DECLARATION: DECLARATION . EXPRESSION SEMI_COLON
+    4            | DECLARATION . FUNCTION_DEC
+    8            | DECLARATION . RETURN_RULE SEMI_COLON
+   11            | DECLARATION . IF
+   12            | DECLARATION . IF ELSE
+   14            | DECLARATION . FOR
+
+    $end           shift, and go to state 28
+    RETURN         shift, and go to state 2
+    IF_STATEMENT   shift, and go to state 3
+    FOR_STATEMENT  shift, and go to state 4
+    IDENTIFIER     shift, and go to state 29
+    TYPE           shift, and go to state 6
+
+    EXPRESSION    go to state 30
+    RETURN_RULE   go to state 31
+    FUNCTION_DEC  go to state 32
+    IF            go to state 33
+    FOR           go to state 34
+
+
+state 8
+
+    5 DECLARATION: HEADER .
+
+    $default  reduce using rule 5 (DECLARATION)
+
+
+state 9
+
+    1 DECLARATION: EXPRESSION . SEMI_COLON
+   26 FUNCTION_DEC: EXPRESSION . PARAMATER_CONTAINER OPEN_BRACKET DECLARATION CLOSE_BRACKET
+   27             | EXPRESSION . PARAMATER_CONTAINER SEMI_COLON
+
+    SEMI_COLON  shift, and go to state 35
+    OPEN_PAR    shift, and go to state 36
+
+    PARAMATER_CONTAINER  go to state 37
+
+
+state 10
+
+    7 DECLARATION: RETURN_RULE . SEMI_COLON
+
+    SEMI_COLON  shift, and go to state 38
+
+
+state 11
+
+    3 DECLARATION: FUNCTION_DEC .
+
+    $default  reduce using rule 3 (DECLARATION)
+
+
+state 12
+
+    6 DECLARATION: FUNCTION_CALL .
+
+    $default  reduce using rule 6 (DECLARATION)
+
+
+state 13
+
+    9 DECLARATION: IF .
+   10            | IF . ELSE
+
+    ELSE_STATEMENT  shift, and go to state 39
+
+    $default  reduce using rule 9 (DECLARATION)
+
+    ELSE  go to state 40
+
+
+state 14
+
+   13 DECLARATION: FOR .
+
+    $default  reduce using rule 13 (DECLARATION)
+
+
+state 15
+
+   15 HEADER: HASHTAG INCLUDE . STRING
+   16       | HASHTAG INCLUDE . LEFT_TRI IDENTIFIER PERIOD IDENTIFIER RIGHT_TRI
+
+    LEFT_TRI  shift, and go to state 41
+    STRING    shift, and go to state 42
+
+
+state 16
+
+   46 NUMBER: FLOAT_VALUE .
+
+    $default  reduce using rule 46 (NUMBER)
+
+
+state 17
+
+   45 NUMBER: INT_VALUE .
+
+    $default  reduce using rule 45 (NUMBER)
+
+
+state 18
+
+   47 NUMBER: CHAR_VALUE .
+
+    $default  reduce using rule 47 (NUMBER)
+
+
+state 19
+
+   25 RETURN_RULE: RETURN IDENTIFIER .
+   28 FUNCTION_CALL: IDENTIFIER . OPEN_PAR CALL_LIST CLOSE_PAR SEMI_COLON
+
+    OPEN_PAR  shift, and go to state 26
+
+    $default  reduce using rule 25 (RETURN_RULE)
+
+
+state 20
+
+   48 NUMBER: STRING .
+
+    $default  reduce using rule 48 (NUMBER)
+
+
+state 21
+
+   24 RETURN_RULE: RETURN FUNCTION_CALL .
+
+    $default  reduce using rule 24 (RETURN_RULE)
+
+
+state 22
+
+   23 RETURN_RULE: RETURN NUMBER .
+
+    $default  reduce using rule 23 (RETURN_RULE)
+
+
+state 23
+
+   33 IF: IF_STATEMENT OPEN_PAR . COMPARISON CLOSE_PAR OPEN_BRACKET DECLARATION CLOSE_BRACKET
+
+    FLOAT_VALUE  shift, and go to state 16
+    INT_VALUE    shift, and go to state 17
+    CHAR_VALUE   shift, and go to state 18
+    IDENTIFIER   shift, and go to state 43
+    STRING       shift, and go to state 20
+
+    COMPARISON  go to state 44
+    NUMBER      go to state 45
+
+
+state 24
+
+   35 FOR: FOR_STATEMENT OPEN_PAR . EXPRESSION SEMI_COLON COMPARISON SEMI_COLON EXPRESSION CLOSE_PAR OPEN_BRACKET DECLARATION CLOSE_BRACKET
+
+    IDENTIFIER  shift, and go to state 29
+    TYPE        shift, and go to state 6
+
+    EXPRESSION  go to state 46
+
+
+state 25
+
+   19 EXPRESSION: IDENTIFIER ASSIGNMENT . IDENTIFIER
+   20           | IDENTIFIER ASSIGNMENT . NUMBER
+
+    FLOAT_VALUE  shift, and go to state 16
+    INT_VALUE    shift, and go to state 17
+    CHAR_VALUE   shift, and go to state 18
+    IDENTIFIER   shift, and go to state 47
+    STRING       shift, and go to state 20
+
+    NUMBER  go to state 48
+
+
+state 26
+
+   28 FUNCTION_CALL: IDENTIFIER OPEN_PAR . CALL_LIST CLOSE_PAR SEMI_COLON
+
+    FLOAT_VALUE  shift, and go to state 16
+    INT_VALUE    shift, and go to state 17
+    CHAR_VALUE   shift, and go to state 18
+    STRING       shift, and go to state 20
+
+    CALL_LIST  go to state 49
+    NUMBER     go to state 50
+
+
+state 27
+
+   17 EXPRESSION: TYPE IDENTIFIER . ASSIGNMENT NUMBER
+   18           | TYPE IDENTIFIER . ASSIGNMENT IDENTIFIER
+   21           | TYPE IDENTIFIER .
+
+    ASSIGNMENT  shift, and go to state 51
+
+    $default  reduce using rule 21 (EXPRESSION)
+
+
+state 28
+
+    0 $accept: DECLARATION $end .
+
+    $default  accept
+
+
+state 29
+
+   19 EXPRESSION: IDENTIFIER . ASSIGNMENT IDENTIFIER
+   20           | IDENTIFIER . ASSIGNMENT NUMBER
+
+    ASSIGNMENT  shift, and go to state 25
+
+
+state 30
+
+    2 DECLARATION: DECLARATION EXPRESSION . SEMI_COLON
+   26 FUNCTION_DEC: EXPRESSION . PARAMATER_CONTAINER OPEN_BRACKET DECLARATION CLOSE_BRACKET
+   27             | EXPRESSION . PARAMATER_CONTAINER SEMI_COLON
+
+    SEMI_COLON  shift, and go to state 52
+    OPEN_PAR    shift, and go to state 36
+
+    PARAMATER_CONTAINER  go to state 37
+
+
+state 31
+
+    8 DECLARATION: DECLARATION RETURN_RULE . SEMI_COLON
+
+    SEMI_COLON  shift, and go to state 53
+
+
+state 32
+
+    4 DECLARATION: DECLARATION FUNCTION_DEC .
+
+    $default  reduce using rule 4 (DECLARATION)
+
+
+state 33
+
+   11 DECLARATION: DECLARATION IF .
+   12            | DECLARATION IF . ELSE
+
+    ELSE_STATEMENT  shift, and go to state 39
+
+    $default  reduce using rule 11 (DECLARATION)
+
+    ELSE  go to state 54
+
+
+state 34
+
+   14 DECLARATION: DECLARATION FOR .
+
+    $default  reduce using rule 14 (DECLARATION)
+
+
+state 35
+
+    1 DECLARATION: EXPRESSION SEMI_COLON .
+
+    $default  reduce using rule 1 (DECLARATION)
+
+
+state 36
+
+   31 PARAMATER_CONTAINER: OPEN_PAR . EXPRESSION COMMA EXPRESSION CLOSE_PAR
+   32                    | OPEN_PAR . CLOSE_PAR
+
+    CLOSE_PAR   shift, and go to state 55
+    IDENTIFIER  shift, and go to state 29
+    TYPE        shift, and go to state 6
+
+    EXPRESSION  go to state 56
+
+
+state 37
+
+   26 FUNCTION_DEC: EXPRESSION PARAMATER_CONTAINER . OPEN_BRACKET DECLARATION CLOSE_BRACKET
+   27             | EXPRESSION PARAMATER_CONTAINER . SEMI_COLON
+
+    SEMI_COLON    shift, and go to state 57
+    OPEN_BRACKET  shift, and go to state 58
+
+
+state 38
+
+    7 DECLARATION: RETURN_RULE SEMI_COLON .
+
+    $default  reduce using rule 7 (DECLARATION)
+
+
+state 39
+
+   34 ELSE: ELSE_STATEMENT . OPEN_BRACKET DECLARATION CLOSE_BRACKET
+
+    OPEN_BRACKET  shift, and go to state 59
+
+
+state 40
+
+   10 DECLARATION: IF ELSE .
+
+    $default  reduce using rule 10 (DECLARATION)
+
+
+state 41
+
+   16 HEADER: HASHTAG INCLUDE LEFT_TRI . IDENTIFIER PERIOD IDENTIFIER RIGHT_TRI
+
+    IDENTIFIER  shift, and go to state 60
+
+
+state 42
+
+   15 HEADER: HASHTAG INCLUDE STRING .
+
+    $default  reduce using rule 15 (HEADER)
+
+
+state 43
+
+   36 COMPARISON: IDENTIFIER . COMPARATOR IDENTIFIER
+   37           | IDENTIFIER . COMPARATOR NUMBER
+
+    EQUALS               shift, and go to state 61
+    LESS_THAN_EQUALS     shift, and go to state 62
+    GREATER_THAN_EQUALS  shift, and go to state 63
+    NOT_EQUALS           shift, and go to state 64
+    LEFT_TRI             shift, and go to state 65
+    RIGHT_TRI            shift, and go to state 66
+
+    COMPARATOR  go to state 67
+
+
+state 44
+
+   33 IF: IF_STATEMENT OPEN_PAR COMPARISON . CLOSE_PAR OPEN_BRACKET DECLARATION CLOSE_BRACKET
+
+    CLOSE_PAR  shift, and go to state 68
+
+
+state 45
+
+   38 COMPARISON: NUMBER . COMPARATOR IDENTIFIER
+
+    EQUALS               shift, and go to state 61
+    LESS_THAN_EQUALS     shift, and go to state 62
+    GREATER_THAN_EQUALS  shift, and go to state 63
+    NOT_EQUALS           shift, and go to state 64
+    LEFT_TRI             shift, and go to state 65
+    RIGHT_TRI            shift, and go to state 66
+
+    COMPARATOR  go to state 69
+
+
+state 46
+
+   35 FOR: FOR_STATEMENT OPEN_PAR EXPRESSION . SEMI_COLON COMPARISON SEMI_COLON EXPRESSION CLOSE_PAR OPEN_BRACKET DECLARATION CLOSE_BRACKET
+
+    SEMI_COLON  shift, and go to state 70
+
+
+state 47
+
+   19 EXPRESSION: IDENTIFIER ASSIGNMENT IDENTIFIER .
+
+    $default  reduce using rule 19 (EXPRESSION)
+
+
+state 48
+
+   20 EXPRESSION: IDENTIFIER ASSIGNMENT NUMBER .
+
+    $default  reduce using rule 20 (EXPRESSION)
+
+
+state 49
+
+   28 FUNCTION_CALL: IDENTIFIER OPEN_PAR CALL_LIST . CLOSE_PAR SEMI_COLON
+   29 CALL_LIST: CALL_LIST . COMMA CALL_LIST
+
+    COMMA      shift, and go to state 71
+    CLOSE_PAR  shift, and go to state 72
+
+
+state 50
+
+   30 CALL_LIST: NUMBER .
+
+    $default  reduce using rule 30 (CALL_LIST)
+
+
+state 51
+
+   17 EXPRESSION: TYPE IDENTIFIER ASSIGNMENT . NUMBER
+   18           | TYPE IDENTIFIER ASSIGNMENT . IDENTIFIER
+
+    FLOAT_VALUE  shift, and go to state 16
+    INT_VALUE    shift, and go to state 17
+    CHAR_VALUE   shift, and go to state 18
+    IDENTIFIER   shift, and go to state 73
+    STRING       shift, and go to state 20
+
+    NUMBER  go to state 74
+
+
+state 52
+
+    2 DECLARATION: DECLARATION EXPRESSION SEMI_COLON .
+
+    $default  reduce using rule 2 (DECLARATION)
+
+
+state 53
+
+    8 DECLARATION: DECLARATION RETURN_RULE SEMI_COLON .
+
+    $default  reduce using rule 8 (DECLARATION)
+
+
+state 54
+
+   12 DECLARATION: DECLARATION IF ELSE .
+
+    $default  reduce using rule 12 (DECLARATION)
+
+
+state 55
+
+   32 PARAMATER_CONTAINER: OPEN_PAR CLOSE_PAR .
+
+    $default  reduce using rule 32 (PARAMATER_CONTAINER)
+
+
+state 56
+
+   31 PARAMATER_CONTAINER: OPEN_PAR EXPRESSION . COMMA EXPRESSION CLOSE_PAR
+
+    COMMA  shift, and go to state 75
+
+
+state 57
+
+   27 FUNCTION_DEC: EXPRESSION PARAMATER_CONTAINER SEMI_COLON .
+
+    $default  reduce using rule 27 (FUNCTION_DEC)
+
+
+state 58
+
+   26 FUNCTION_DEC: EXPRESSION PARAMATER_CONTAINER OPEN_BRACKET . DECLARATION CLOSE_BRACKET
+
+    HASHTAG        shift, and go to state 1
+    RETURN         shift, and go to state 2
+    IF_STATEMENT   shift, and go to state 3
+    FOR_STATEMENT  shift, and go to state 4
+    IDENTIFIER     shift, and go to state 5
+    TYPE           shift, and go to state 6
+
+    DECLARATION    go to state 76
+    HEADER         go to state 8
+    EXPRESSION     go to state 9
+    RETURN_RULE    go to state 10
+    FUNCTION_DEC   go to state 11
+    FUNCTION_CALL  go to state 12
+    IF             go to state 13
+    FOR            go to state 14
+
+
+state 59
+
+   34 ELSE: ELSE_STATEMENT OPEN_BRACKET . DECLARATION CLOSE_BRACKET
+
+    HASHTAG        shift, and go to state 1
+    RETURN         shift, and go to state 2
+    IF_STATEMENT   shift, and go to state 3
+    FOR_STATEMENT  shift, and go to state 4
+    IDENTIFIER     shift, and go to state 5
+    TYPE           shift, and go to state 6
+
+    DECLARATION    go to state 77
+    HEADER         go to state 8
+    EXPRESSION     go to state 9
+    RETURN_RULE    go to state 10
+    FUNCTION_DEC   go to state 11
+    FUNCTION_CALL  go to state 12
+    IF             go to state 13
+    FOR            go to state 14
+
+
+state 60
+
+   16 HEADER: HASHTAG INCLUDE LEFT_TRI IDENTIFIER . PERIOD IDENTIFIER RIGHT_TRI
+
+    PERIOD  shift, and go to state 78
+
+
+state 61
+
+   39 COMPARATOR: EQUALS .
+
+    $default  reduce using rule 39 (COMPARATOR)
+
+
+state 62
+
+   42 COMPARATOR: LESS_THAN_EQUALS .
+
+    $default  reduce using rule 42 (COMPARATOR)
+
+
+state 63
+
+   41 COMPARATOR: GREATER_THAN_EQUALS .
+
+    $default  reduce using rule 41 (COMPARATOR)
+
+
+state 64
+
+   40 COMPARATOR: NOT_EQUALS .
+
+    $default  reduce using rule 40 (COMPARATOR)
+
+
+state 65
+
+   43 COMPARATOR: LEFT_TRI .
+
+    $default  reduce using rule 43 (COMPARATOR)
+
+
+state 66
+
+   44 COMPARATOR: RIGHT_TRI .
+
+    $default  reduce using rule 44 (COMPARATOR)
+
+
+state 67
+
+   36 COMPARISON: IDENTIFIER COMPARATOR . IDENTIFIER
+   37           | IDENTIFIER COMPARATOR . NUMBER
+
+    FLOAT_VALUE  shift, and go to state 16
+    INT_VALUE    shift, and go to state 17
+    CHAR_VALUE   shift, and go to state 18
+    IDENTIFIER   shift, and go to state 79
+    STRING       shift, and go to state 20
+
+    NUMBER  go to state 80
+
+
+state 68
+
+   33 IF: IF_STATEMENT OPEN_PAR COMPARISON CLOSE_PAR . OPEN_BRACKET DECLARATION CLOSE_BRACKET
+
+    OPEN_BRACKET  shift, and go to state 81
+
+
+state 69
+
+   38 COMPARISON: NUMBER COMPARATOR . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 82
+
+
+state 70
+
+   35 FOR: FOR_STATEMENT OPEN_PAR EXPRESSION SEMI_COLON . COMPARISON SEMI_COLON EXPRESSION CLOSE_PAR OPEN_BRACKET DECLARATION CLOSE_BRACKET
+
+    FLOAT_VALUE  shift, and go to state 16
+    INT_VALUE    shift, and go to state 17
+    CHAR_VALUE   shift, and go to state 18
+    IDENTIFIER   shift, and go to state 43
+    STRING       shift, and go to state 20
+
+    COMPARISON  go to state 83
+    NUMBER      go to state 45
+
+
+state 71
+
+   29 CALL_LIST: CALL_LIST COMMA . CALL_LIST
+
+    FLOAT_VALUE  shift, and go to state 16
+    INT_VALUE    shift, and go to state 17
+    CHAR_VALUE   shift, and go to state 18
+    STRING       shift, and go to state 20
+
+    CALL_LIST  go to state 84
+    NUMBER     go to state 50
+
+
+state 72
+
+   28 FUNCTION_CALL: IDENTIFIER OPEN_PAR CALL_LIST CLOSE_PAR . SEMI_COLON
+
+    SEMI_COLON  shift, and go to state 85
+
+
+state 73
+
+   18 EXPRESSION: TYPE IDENTIFIER ASSIGNMENT IDENTIFIER .
+
+    $default  reduce using rule 18 (EXPRESSION)
+
+
+state 74
+
+   17 EXPRESSION: TYPE IDENTIFIER ASSIGNMENT NUMBER .
+
+    $default  reduce using rule 17 (EXPRESSION)
+
+
+state 75
+
+   31 PARAMATER_CONTAINER: OPEN_PAR EXPRESSION COMMA . EXPRESSION CLOSE_PAR
+
+    IDENTIFIER  shift, and go to state 29
+    TYPE        shift, and go to state 6
+
+    EXPRESSION  go to state 86
+
+
+state 76
+
+    2 DECLARATION: DECLARATION . EXPRESSION SEMI_COLON
+    4            | DECLARATION . FUNCTION_DEC
+    8            | DECLARATION . RETURN_RULE SEMI_COLON
+   11            | DECLARATION . IF
+   12            | DECLARATION . IF ELSE
+   14            | DECLARATION . FOR
+   26 FUNCTION_DEC: EXPRESSION PARAMATER_CONTAINER OPEN_BRACKET DECLARATION . CLOSE_BRACKET
+
+    CLOSE_BRACKET  shift, and go to state 87
+    RETURN         shift, and go to state 2
+    IF_STATEMENT   shift, and go to state 3
+    FOR_STATEMENT  shift, and go to state 4
+    IDENTIFIER     shift, and go to state 29
+    TYPE           shift, and go to state 6
+
+    EXPRESSION    go to state 30
+    RETURN_RULE   go to state 31
+    FUNCTION_DEC  go to state 32
+    IF            go to state 33
+    FOR           go to state 34
+
+
+state 77
+
+    2 DECLARATION: DECLARATION . EXPRESSION SEMI_COLON
+    4            | DECLARATION . FUNCTION_DEC
+    8            | DECLARATION . RETURN_RULE SEMI_COLON
+   11            | DECLARATION . IF
+   12            | DECLARATION . IF ELSE
+   14            | DECLARATION . FOR
+   34 ELSE: ELSE_STATEMENT OPEN_BRACKET DECLARATION . CLOSE_BRACKET
+
+    CLOSE_BRACKET  shift, and go to state 88
+    RETURN         shift, and go to state 2
+    IF_STATEMENT   shift, and go to state 3
+    FOR_STATEMENT  shift, and go to state 4
+    IDENTIFIER     shift, and go to state 29
+    TYPE           shift, and go to state 6
+
+    EXPRESSION    go to state 30
+    RETURN_RULE   go to state 31
+    FUNCTION_DEC  go to state 32
+    IF            go to state 33
+    FOR           go to state 34
+
+
+state 78
+
+   16 HEADER: HASHTAG INCLUDE LEFT_TRI IDENTIFIER PERIOD . IDENTIFIER RIGHT_TRI
+
+    IDENTIFIER  shift, and go to state 89
+
+
+state 79
+
+   36 COMPARISON: IDENTIFIER COMPARATOR IDENTIFIER .
+
+    $default  reduce using rule 36 (COMPARISON)
+
+
+state 80
+
+   37 COMPARISON: IDENTIFIER COMPARATOR NUMBER .
+
+    $default  reduce using rule 37 (COMPARISON)
+
+
+state 81
+
+   33 IF: IF_STATEMENT OPEN_PAR COMPARISON CLOSE_PAR OPEN_BRACKET . DECLARATION CLOSE_BRACKET
+
+    HASHTAG        shift, and go to state 1
+    RETURN         shift, and go to state 2
+    IF_STATEMENT   shift, and go to state 3
+    FOR_STATEMENT  shift, and go to state 4
+    IDENTIFIER     shift, and go to state 5
+    TYPE           shift, and go to state 6
+
+    DECLARATION    go to state 90
+    HEADER         go to state 8
+    EXPRESSION     go to state 9
+    RETURN_RULE    go to state 10
+    FUNCTION_DEC   go to state 11
+    FUNCTION_CALL  go to state 12
+    IF             go to state 13
+    FOR            go to state 14
+
+
+state 82
+
+   38 COMPARISON: NUMBER COMPARATOR IDENTIFIER .
+
+    $default  reduce using rule 38 (COMPARISON)
+
+
+state 83
+
+   35 FOR: FOR_STATEMENT OPEN_PAR EXPRESSION SEMI_COLON COMPARISON . SEMI_COLON EXPRESSION CLOSE_PAR OPEN_BRACKET DECLARATION CLOSE_BRACKET
+
+    SEMI_COLON  shift, and go to state 91
+
+
+state 84
+
+   29 CALL_LIST: CALL_LIST . COMMA CALL_LIST
+   29          | CALL_LIST COMMA CALL_LIST .
+
+    COMMA  shift, and go to state 71
+
+    COMMA     [reduce using rule 29 (CALL_LIST)]
+    $default  reduce using rule 29 (CALL_LIST)
+
+
+state 85
+
+   28 FUNCTION_CALL: IDENTIFIER OPEN_PAR CALL_LIST CLOSE_PAR SEMI_COLON .
+
+    $default  reduce using rule 28 (FUNCTION_CALL)
+
+
+state 86
+
+   31 PARAMATER_CONTAINER: OPEN_PAR EXPRESSION COMMA EXPRESSION . CLOSE_PAR
+
+    CLOSE_PAR  shift, and go to state 92
+
+
+state 87
+
+   26 FUNCTION_DEC: EXPRESSION PARAMATER_CONTAINER OPEN_BRACKET DECLARATION CLOSE_BRACKET .
+
+    $default  reduce using rule 26 (FUNCTION_DEC)
+
+
+state 88
+
+   34 ELSE: ELSE_STATEMENT OPEN_BRACKET DECLARATION CLOSE_BRACKET .
+
+    $default  reduce using rule 34 (ELSE)
+
+
+state 89
+
+   16 HEADER: HASHTAG INCLUDE LEFT_TRI IDENTIFIER PERIOD IDENTIFIER . RIGHT_TRI
+
+    RIGHT_TRI  shift, and go to state 93
+
+
+state 90
+
+    2 DECLARATION: DECLARATION . EXPRESSION SEMI_COLON
+    4            | DECLARATION . FUNCTION_DEC
+    8            | DECLARATION . RETURN_RULE SEMI_COLON
+   11            | DECLARATION . IF
+   12            | DECLARATION . IF ELSE
+   14            | DECLARATION . FOR
+   33 IF: IF_STATEMENT OPEN_PAR COMPARISON CLOSE_PAR OPEN_BRACKET DECLARATION . CLOSE_BRACKET
+
+    CLOSE_BRACKET  shift, and go to state 94
+    RETURN         shift, and go to state 2
+    IF_STATEMENT   shift, and go to state 3
+    FOR_STATEMENT  shift, and go to state 4
+    IDENTIFIER     shift, and go to state 29
+    TYPE           shift, and go to state 6
+
+    EXPRESSION    go to state 30
+    RETURN_RULE   go to state 31
+    FUNCTION_DEC  go to state 32
+    IF            go to state 33
+    FOR           go to state 34
+
+
+state 91
+
+   35 FOR: FOR_STATEMENT OPEN_PAR EXPRESSION SEMI_COLON COMPARISON SEMI_COLON . EXPRESSION CLOSE_PAR OPEN_BRACKET DECLARATION CLOSE_BRACKET
+
+    IDENTIFIER  shift, and go to state 29
+    TYPE        shift, and go to state 6
+
+    EXPRESSION  go to state 95
+
+
+state 92
+
+   31 PARAMATER_CONTAINER: OPEN_PAR EXPRESSION COMMA EXPRESSION CLOSE_PAR .
+
+    $default  reduce using rule 31 (PARAMATER_CONTAINER)
+
+
+state 93
+
+   16 HEADER: HASHTAG INCLUDE LEFT_TRI IDENTIFIER PERIOD IDENTIFIER RIGHT_TRI .
+
+    $default  reduce using rule 16 (HEADER)
+
+
+state 94
+
+   33 IF: IF_STATEMENT OPEN_PAR COMPARISON CLOSE_PAR OPEN_BRACKET DECLARATION CLOSE_BRACKET .
+
+    $default  reduce using rule 33 (IF)
+
+
+state 95
+
+   35 FOR: FOR_STATEMENT OPEN_PAR EXPRESSION SEMI_COLON COMPARISON SEMI_COLON EXPRESSION . CLOSE_PAR OPEN_BRACKET DECLARATION CLOSE_BRACKET
+
+    CLOSE_PAR  shift, and go to state 96
+
+
+state 96
+
+   35 FOR: FOR_STATEMENT OPEN_PAR EXPRESSION SEMI_COLON COMPARISON SEMI_COLON EXPRESSION CLOSE_PAR . OPEN_BRACKET DECLARATION CLOSE_BRACKET
+
+    OPEN_BRACKET  shift, and go to state 97
+
+
+state 97
+
+   35 FOR: FOR_STATEMENT OPEN_PAR EXPRESSION SEMI_COLON COMPARISON SEMI_COLON EXPRESSION CLOSE_PAR OPEN_BRACKET . DECLARATION CLOSE_BRACKET
+
+    HASHTAG        shift, and go to state 1
+    RETURN         shift, and go to state 2
+    IF_STATEMENT   shift, and go to state 3
+    FOR_STATEMENT  shift, and go to state 4
+    IDENTIFIER     shift, and go to state 5
+    TYPE           shift, and go to state 6
+
+    DECLARATION    go to state 98
+    HEADER         go to state 8
+    EXPRESSION     go to state 9
+    RETURN_RULE    go to state 10
+    FUNCTION_DEC   go to state 11
+    FUNCTION_CALL  go to state 12
+    IF             go to state 13
+    FOR            go to state 14
+
+
+state 98
+
+    2 DECLARATION: DECLARATION . EXPRESSION SEMI_COLON
+    4            | DECLARATION . FUNCTION_DEC
+    8            | DECLARATION . RETURN_RULE SEMI_COLON
+   11            | DECLARATION . IF
+   12            | DECLARATION . IF ELSE
+   14            | DECLARATION . FOR
+   35 FOR: FOR_STATEMENT OPEN_PAR EXPRESSION SEMI_COLON COMPARISON SEMI_COLON EXPRESSION CLOSE_PAR OPEN_BRACKET DECLARATION . CLOSE_BRACKET
+
+    CLOSE_BRACKET  shift, and go to state 99
+    RETURN         shift, and go to state 2
+    IF_STATEMENT   shift, and go to state 3
+    FOR_STATEMENT  shift, and go to state 4
+    IDENTIFIER     shift, and go to state 29
+    TYPE           shift, and go to state 6
+
+    EXPRESSION    go to state 30
+    RETURN_RULE   go to state 31
+    FUNCTION_DEC  go to state 32
+    IF            go to state 33
+    FOR           go to state 34
+
+
+state 99
+
+   35 FOR: FOR_STATEMENT OPEN_PAR EXPRESSION SEMI_COLON COMPARISON SEMI_COLON EXPRESSION CLOSE_PAR OPEN_BRACKET DECLARATION CLOSE_BRACKET .
+
+    $default  reduce using rule 35 (FOR)
