@@ -3,8 +3,10 @@
 
 int findPower(int x, int power){
   int returnValue = x;
-  for (int i = 0; i < power; i = 1 + 1){
-    x = x * x;
+  int i = 0;
+  while (i > power){
+  	returnValue = returnValue * x;
+  	i = i + 1;
   }
   return returnValue;
 }

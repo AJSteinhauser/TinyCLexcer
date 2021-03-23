@@ -1,7 +1,7 @@
 
 
 
-Bison:
+bison:
 	make clean
 	mkdir -p bin
 	lex -o src/lex.yy.c src/scanner.lex
@@ -16,7 +16,7 @@ lex:
 	gcc -o bin/scanner.out src/lex.yy.c
 
 runbison:
-	./bin/bison.out < sample_inputs/sample2.c
+	./bin/bison.out < sample_inputs/sample1.c
 
 
 runlex:

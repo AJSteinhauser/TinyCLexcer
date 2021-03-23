@@ -1,23 +1,30 @@
-int main()
-{
-  int n, c;
+
+#include <stdio.h>
+
+int main(void){
+  int n = 3;
+  int c = 6;
  
   printf("Enter a number\n");
-  scanf("%d", &n);
- 
-  if (n == 2)
+  scanf("%d", n);
+  if (n == 2){
     printf("Prime number.\n");
-  else
-  {
-    for (c = 2; c <= n - 1; c++)
-    {
-      if (n % c == 0)
-        break;
+  }
+  else{
+    while (x > 0){
+      if (n / c == 0){
+        printf("%s\n", "Break");
+      }
     }
-    if (c != n)
+    if (c != n){
       printf("Not prime.\n");
-     else
-       printf("Prime number.\n");
+    }
+    else{
+      printf("Prime number.\n");
+    }
   }
   return 0;
 }
+
+
+

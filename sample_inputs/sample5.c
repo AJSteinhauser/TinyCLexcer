@@ -1,20 +1,15 @@
 
 
-struct game
+
+int main(void)
 {
-  char game_name;
-  int number_of_players;
-}; 
+  int game = 0;
 
-int main()
-{
-  struct game g;
+  strcpy(game_name, "Cricket");
+  number_of_players = 11;
 
-  strcpy(g.game_name, "Cricket");
-  g.number_of_players = 11;
-
-  printf("Name of game: %s\n", g.game_name);
-  printf("Number of players: %d\n", g.number_of_players);
+  printf("Name of game: %s\n", game_name);
+  printf("Number of players: %d\n", number_of_players);
 
   return 0;
 }

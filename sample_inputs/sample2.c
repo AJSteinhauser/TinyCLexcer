@@ -5,6 +5,13 @@ int compare(int x, int y){
     return 1;
   }
   else{
-  	return -1;
+  	printf("%s\n", "TEST");
   }
+}
+
+
+
+int main(void){
+
+	printf("%s\n","TEST");
 }
