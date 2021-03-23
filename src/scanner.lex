@@ -37,7 +37,7 @@
 "=" 						{return ASSIGNMENT;}
 "=="						{return EQUALS;}
 ">="						{return GREATER_THAN_EQUALS;}
-['][.]['] 					{;}
+['][.]['] 					{return STRING;}
 "<="						{return LESS_THAN_EQUALS;}
 "!="						{return NOT_EQUALS;}
 "+" 						{return PLUS;}
@@ -48,7 +48,6 @@
 "*"							{return MULTIPLY;}
 ","							{return COMMA;}
 "/" 						{return DIVIDE;}
-"|" 						{;}
 "&"							{return POINTER;}
 ";"							{return SEMI_COLON;}
 "{"							{return OPEN_BRACKET;}
@@ -56,7 +55,6 @@
 "("							{return OPEN_PAR;}
 ")"							{return CLOSE_PAR;}
 "."							{return PERIOD;}
-"%"							{;}
 [ \t]
 [\n]						{lineNum++;}
 .							{yyerror("Invalid character ");}
