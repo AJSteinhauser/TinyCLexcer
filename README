@@ -1,5 +1,5 @@
 
-##Project 2
+# Project 2
 
    To compile bison code:
       make bison
@@ -10,8 +10,12 @@
    To execute parser on custom TinyC program
       ./bin 
 
+Project 2 is a partner project by:
+	AJ Steinhauser
+	Sol Park
 
-##Project 1
+
+# Project 1
    To compile lexer code:
       make lex
 

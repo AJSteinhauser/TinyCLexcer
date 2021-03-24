@@ -31,8 +31,8 @@
 "while"						{return WHILE;}
 
 [a-zA-Z_]+[a-zA-Z0-9_]*		{return IDENTIFIER;}
-[-+]?[0-9]+					{return INT_VALUE;}
-[-+]?[0-9]*\.?[0-9]+		{return FLOAT_VALUE;}
+[0-9]+					{return INT_VALUE;}
+[0-9]*\.?[0-9]+		{return FLOAT_VALUE;}
 ["].*["]					{return STRING;}
 "=" 						{return ASSIGNMENT;}
 "=="						{return EQUALS;}
@@ -58,7 +58,6 @@
 [ \t]
 [\n]						{lineNum++;}
 .							{yyerror("Invalid character ");}
-
 %%
 
 
