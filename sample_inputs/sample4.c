@@ -4,9 +4,10 @@
 int main(void){
   int n = 3;
   int c = 6;
- 
   printf("Enter a number\n");
   scanf("%d", n);
+
+  i * 5;
   if (n == 2){
     printf("Prime number.\n");
   }
