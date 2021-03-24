@@ -8,7 +8,7 @@
       make runbison
 
    To execute parser on custom TinyC program
-      ./bin 
+      ./bin/bison.out < [CUSTOM_INPUTFILE_.C]
 
 Project 2 is a partner project by:
 	AJ Steinhauser
