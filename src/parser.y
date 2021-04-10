@@ -5,7 +5,7 @@
 
 #define YYERROR_VERBOSE 1
 
-void yyerror(const char *msg);
+void yyerror(char *msg);
 extern int yylex();
 extern int lineNum;
 extern char* yytext;
