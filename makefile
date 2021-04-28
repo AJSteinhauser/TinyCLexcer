@@ -23,6 +23,7 @@ runlex:
 	./bin/scanner.out sample_inputs/sample1.c
 
 clean:
+	rm -f src/parser.output
 	rm -f src/parser.tab.c
 	rm -rf ./bin
 	rm -f src/lex.yy.c

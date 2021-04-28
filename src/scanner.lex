@@ -9,7 +9,8 @@
 	int lineNum = 1;
 	
 	extern void yyerror(char *msg);
-	
+	//extern SYMBOL_NODE symbol_table[SYMBOL_TABLE_SIZE];
+	//extern int symbolTableSize;
 %}
 
 %option noyywrap
@@ -31,8 +32,8 @@
 "while"						{return WHILE;}
 
 [a-zA-Z_]+[a-zA-Z0-9_]*		{return IDENTIFIER;}
-[0-9]+					{return INT_VALUE;}
-[0-9]*\.?[0-9]+		{return FLOAT_VALUE;}
+[0-9]+						{return INT_VALUE;}
+[0-9]*\.?[0-9]+				{return FLOAT_VALUE;}
 ["].*["]					{return STRING;}
 "=" 						{return ASSIGNMENT;}
 "=="						{return EQUALS;}
