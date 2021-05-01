@@ -15,7 +15,7 @@ lex:
 	lex -o src/lex.yy.c src/scanner.lex
 	gcc -o bin/scanner.out src/lex.yy.c
 
-runbison:
+run:
 	./bin/bison.out < sample_inputs/sample1.c
 
 

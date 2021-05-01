@@ -56,7 +56,7 @@ extern char* yytext;
 CONSTANT : FLOAT_VALUE {$$ = newNode(addDataObject_float(yytext), CONSTANT, NULL , NULL, NULL);}
 		 | STRING {$$ = newNode(addDataObject_str(yytext), CONSTANT, NULL , NULL, NULL); }
 		 | CHAR_VALUE {$$ = newNode(-1, CONSTANT, NULL , NULL, NULL);}
-		 | INT_VALUE {newNode(addDataObject_int(yytext), CONSTANT, NULL , NULL, NULL);}
+		 | INT_VALUE {$$ = newNode(addDataObject_int(yytext), CONSTANT, NULL , NULL, NULL);}
 		 ;
 
 PRIMARY_EXPRESSION : CONSTANT {$$ = newNode(-1, PRIMARY_EXPRESSION, $1, NULL, NULL);}
@@ -178,8 +178,8 @@ HEADER : HASHTAG INCLUDE LEFT_TRI IDENTIFIER PERIOD IDENTIFIER RIGHT_TRI
 	   ;
 
 
-PROGRAM	: FUNCTION_DEFINITION_LIST	{BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,$1, NULL, NULL); gen_labels(parseTree);}
-		| HEADER FUNCTION_DEFINITION_LIST {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,$2, NULL, NULL); gen_labels(parseTree);}
+PROGRAM	: FUNCTION_DEFINITION_LIST	{BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,$1, NULL, NULL); }
+		| HEADER FUNCTION_DEFINITION_LIST {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,$2, NULL, NULL);}
 		;
 
 
@@ -217,6 +217,6 @@ int main(void){
 	#endif
     yyparse();
     printf("%s\n", "No Syntax Errors Detected!");
-	printDataTable();
+	gen_labels();
     return 0;
 };

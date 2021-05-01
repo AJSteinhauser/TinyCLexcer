@@ -1542,7 +1542,7 @@ yyreduce:
 
   case 5:
 #line 59 "parser.y"
-    {newNode(addDataObject_int(yytext), CONSTANT, NULL , NULL, NULL);;}
+    {(yyval.bVal) = newNode(addDataObject_int(yytext), CONSTANT, NULL , NULL, NULL);;}
     break;
 
   case 6:
@@ -1842,12 +1842,12 @@ yyreduce:
 
   case 73:
 #line 181 "parser.y"
-    {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,(yyvsp[(1) - (1)].bVal), NULL, NULL); gen_labels(parseTree);;}
+    {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,(yyvsp[(1) - (1)].bVal), NULL, NULL); ;}
     break;
 
   case 74:
 #line 182 "parser.y"
-    {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,(yyvsp[(2) - (2)].bVal), NULL, NULL); gen_labels(parseTree);;}
+    {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,(yyvsp[(2) - (2)].bVal), NULL, NULL);;}
     break;
 
 
@@ -2100,6 +2100,6 @@ int main(void){
 	#endif
     yyparse();
     printf("%s\n", "No Syntax Errors Detected!");
-	printDataTable();
+	gen_labels();
     return 0;
 };

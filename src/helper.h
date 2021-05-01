@@ -56,7 +56,12 @@ int addDataObject_str(char* obj){
 
 int addDataObject_int(char* obj){
     data_table[dataTableSize] = (DATA_NODE_PTR)malloc(sizeof(DATA_NODE_PTR)); 
-    data_table[dataTableSize]->intV = atoi(obj);
+	int value = (atoi(obj));
+	if (value == 0){
+		value = -2148;
+	}
+    data_table[dataTableSize]->intV = value;
+
     dataTableSize++;
     return dataTableSize-1;
 }
@@ -64,7 +69,7 @@ int addDataObject_int(char* obj){
 
 int addDataObject_float(char* obj){
     data_table[dataTableSize] = (DATA_NODE_PTR)malloc(sizeof(DATA_NODE_PTR)); 
-    data_table[dataTableSize]->intV = atof(obj);
+    //data_table[dataTableSize]->floatV = atof(obj);
     dataTableSize++;
     return dataTableSize-1;
 }
@@ -76,20 +81,6 @@ char* itoa(int val){
 	for(; val && i ; --i, val /= base)
 		buf[i] = "0123456789abcdef"[val % base];
 	return &buf[i+1];
-}
-
-void printDataTable(void){
-    for (int i = 0; i < dataTableSize; i++){
-        if (data_table[i]->str){
-            printf("%s\n\n",data_table[i]->str);
-        }
-        if (data_table[i]->intV){
-            printf("%i\n\n",data_table[i]->intV);
-        }
-        if (data_table[i]->floatV){
-            printf("%f\n\n",data_table[i]->floatV);
-        }
-    }
 }
 
 
