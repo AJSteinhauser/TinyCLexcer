@@ -519,11 +519,13 @@ char *yytext;
 	#include "parser.tab.h" // generated via -d
 
 	int lineNum = 1;
-	
+
+	extern char* tokenString;
+	extern int tokenInt;
+	extern float tokenFloat;
 	extern void yyerror(char *msg);
-	//extern SYMBOL_NODE symbol_table[SYMBOL_TABLE_SIZE];
-	//extern int symbolTableSize;
-#line 527 "src/lex.yy.c"
+
+#line 529 "src/lex.yy.c"
 
 #define INITIAL 0
 
@@ -705,9 +707,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 18 "src/scanner.lex"
+#line 20 "src/scanner.lex"
 
-#line 711 "src/lex.yy.c"
+#line 713 "src/lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -791,199 +793,208 @@ do_action:	/* This label is used only to access EOF actions. */
 			goto yy_find_action;
 
 case 1:
-#line 20 "src/scanner.lex"
-case 2:
-#line 21 "src/scanner.lex"
-case 3:
 #line 22 "src/scanner.lex"
-case 4:
+case 2:
 #line 23 "src/scanner.lex"
-case 5:
+case 3:
 #line 24 "src/scanner.lex"
-case 6:
+case 4:
 #line 25 "src/scanner.lex"
+case 5:
+#line 26 "src/scanner.lex"
+case 6:
+#line 27 "src/scanner.lex"
 case 7:
 YY_RULE_SETUP
-#line 25 "src/scanner.lex"
+#line 27 "src/scanner.lex"
 {return TYPE;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 27 "src/scanner.lex"
+#line 29 "src/scanner.lex"
 {return VOID;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 28 "src/scanner.lex"
+#line 30 "src/scanner.lex"
 {return INCLUDE;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 29 "src/scanner.lex"
+#line 31 "src/scanner.lex"
 {return RETURN;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 30 "src/scanner.lex"
+#line 32 "src/scanner.lex"
 {return IF;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 31 "src/scanner.lex"
+#line 33 "src/scanner.lex"
 {return ELSE;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 32 "src/scanner.lex"
+#line 34 "src/scanner.lex"
 {return WHILE;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 34 "src/scanner.lex"
+#line 36 "src/scanner.lex"
 {return IDENTIFIER;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 35 "src/scanner.lex"
-{return INT_VALUE;}
+#line 37 "src/scanner.lex"
+{
+								tokenString = strdup(yytext);
+								return INT_VALUE;
+							}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 36 "src/scanner.lex"
-{return FLOAT_VALUE;}
+#line 41 "src/scanner.lex"
+{
+								tokenString = strdup(yytext);
+								return FLOAT_VALUE;
+							}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 37 "src/scanner.lex"
-{return STRING;}
+#line 45 "src/scanner.lex"
+{
+								tokenString = strdup(yytext);
+								return STRING;
+							}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 38 "src/scanner.lex"
+#line 49 "src/scanner.lex"
 {return ASSIGNMENT;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 39 "src/scanner.lex"
+#line 50 "src/scanner.lex"
 {return EQUALS;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 40 "src/scanner.lex"
+#line 51 "src/scanner.lex"
 {return GREATER_THAN_EQUALS;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 41 "src/scanner.lex"
+#line 52 "src/scanner.lex"
 {return STRING;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 42 "src/scanner.lex"
+#line 53 "src/scanner.lex"
 {return LESS_THAN_EQUALS;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 43 "src/scanner.lex"
+#line 54 "src/scanner.lex"
 {return NOT_EQUALS;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 44 "src/scanner.lex"
+#line 55 "src/scanner.lex"
 {return PLUS;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 45 "src/scanner.lex"
+#line 56 "src/scanner.lex"
 {return MINUS;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 46 "src/scanner.lex"
+#line 57 "src/scanner.lex"
 {return HASHTAG;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 47 "src/scanner.lex"
+#line 58 "src/scanner.lex"
 {return LEFT_TRI;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 48 "src/scanner.lex"
+#line 59 "src/scanner.lex"
 {return RIGHT_TRI;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 49 "src/scanner.lex"
+#line 60 "src/scanner.lex"
 {return MULTIPLY;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 50 "src/scanner.lex"
+#line 61 "src/scanner.lex"
 {return COMMA;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 51 "src/scanner.lex"
+#line 62 "src/scanner.lex"
 {return DIVIDE;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 52 "src/scanner.lex"
+#line 63 "src/scanner.lex"
 {return POINTER;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 53 "src/scanner.lex"
+#line 64 "src/scanner.lex"
 {return SEMI_COLON;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 54 "src/scanner.lex"
+#line 65 "src/scanner.lex"
 {return OPEN_BRACKET;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 55 "src/scanner.lex"
+#line 66 "src/scanner.lex"
 {return CLOSE_BRACKET;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 56 "src/scanner.lex"
+#line 67 "src/scanner.lex"
 {return OPEN_PAR;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 57 "src/scanner.lex"
+#line 68 "src/scanner.lex"
 {return CLOSE_PAR;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 58 "src/scanner.lex"
+#line 69 "src/scanner.lex"
 {return PERIOD;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 59 "src/scanner.lex"
+#line 70 "src/scanner.lex"
 
 	YY_BREAK
 case 40:
 /* rule 40 can match eol */
 YY_RULE_SETUP
-#line 60 "src/scanner.lex"
+#line 71 "src/scanner.lex"
 {lineNum++;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 61 "src/scanner.lex"
+#line 72 "src/scanner.lex"
 {yyerror("Invalid character ");}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 62 "src/scanner.lex"
+#line 73 "src/scanner.lex"
 ECHO;
 	YY_BREAK
-#line 987 "src/lex.yy.c"
+#line 998 "src/lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1980,7 +1991,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 62 "src/scanner.lex"
+#line 73 "src/scanner.lex"
 
 
 

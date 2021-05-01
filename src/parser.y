@@ -2,70 +2,15 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+#include "codeGen.h"
 
 #define YYERROR_VERBOSE 	 1
-#define SYMBOL_TABLE_SIZE 	50
-#define SYMBOL_LENGTH 		15
 
 void yyerror(char *msg);
 extern int yylex();
 extern int lineNum;
 extern char* yytext;
 
-struct treeNode{//Jk i made it trinary instead : )
-	int item;
-	int ident;
-	struct treeNode *left;
-	struct treeNode *middle;
-	struct treeNode *right;
-};
-
-typedef struct treeNode TREE_NODE;
-typedef TREE_NODE *BINARY_TREE;
-
-BINARY_TREE newNode(int, int, BINARY_TREE, BINARY_TREE, BINARY_TREE);
-void print_tree(BINARY_TREE b);
-
-
-struct symbolNode{
-	char identifier[SYMBOL_LENGTH];
-};
-
-typedef struct symbolNode SYMBOL_NODE;
-typedef SYMBOL_NODE *SYMBOL_NODE_PTR;
-
-enum ParseTreeNodeType{
-	PROGRAM = 0, 
-	FUNCTION_DEFINITION_LIST = 1,
-	FUNCTION_DEFINITION = 2,
-	FUNCTION_BODY = 3,
-	FUNCTION_STATEMENT_LIST = 4,
-	VARIABLE_DEFINITION_LIST = 5,
-	VARIABLE_DEFINITION = 6,
-	FUNCTION_PARAMETER_LIST = 7,
-	FUNCTION_PARAMETER = 8,
-	RETURN_TYPE = 9,
-	STATEMENT = 10,
-	EMPTY_STATEMENT = 11,
-	BLOCK_STATEMENT = 12,
-	STATEMENT_LIST = 13,
-	RETURN_STATEMENT = 14,
-	WHILE_STATMENT = 15,
-	IF_STATEMENT = 16,
-	ASSIGNMENT_STATEMENT = 17,
-	EXPRESSION = 18,
-	COMPARISON_EXPRESSION = 19,
-	ADDITIVE_EXPRESSION = 20,
-	MULTIPLICATIVE_EXPRESSION = 21,
-	UNARY_EXPRESSION = 22,
-	FUNCTION_CALL = 23,
-	FUNCTION_ARG_LIST = 24,
-	PRIMARY_EXPRESSION = 25,
-	CONSTANT = 26
-};
-
-SYMBOL_NODE_PTR symbol_table[SYMBOL_TABLE_SIZE];
-int symbolTableSize = 0;
 
 
 %}
@@ -108,10 +53,10 @@ int symbolTableSize = 0;
 
 %%
 
-CONSTANT : FLOAT_VALUE {$$ = newNode(-1, CONSTANT, NULL , NULL, NULL);}
-		 | STRING {$$ = newNode(-1, CONSTANT, NULL , NULL, NULL);}
+CONSTANT : FLOAT_VALUE {$$ = newNode(addDataObject_float(yytext), CONSTANT, NULL , NULL, NULL);}
+		 | STRING {$$ = newNode(addDataObject_str(yytext), CONSTANT, NULL , NULL, NULL); }
 		 | CHAR_VALUE {$$ = newNode(-1, CONSTANT, NULL , NULL, NULL);}
-		 | INT_VALUE {$$ = newNode(-1, CONSTANT, NULL , NULL, NULL);}
+		 | INT_VALUE {newNode(addDataObject_int(yytext), CONSTANT, NULL , NULL, NULL);}
 		 ;
 
 PRIMARY_EXPRESSION : CONSTANT {$$ = newNode(-1, PRIMARY_EXPRESSION, $1, NULL, NULL);}
@@ -233,8 +178,8 @@ HEADER : HASHTAG INCLUDE LEFT_TRI IDENTIFIER PERIOD IDENTIFIER RIGHT_TRI
 	   ;
 
 
-PROGRAM	: FUNCTION_DEFINITION_LIST	{BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,$1, NULL, NULL); print_tree(parseTree);}
-		| HEADER FUNCTION_DEFINITION_LIST {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,$2, NULL, NULL); print_tree(parseTree);}
+PROGRAM	: FUNCTION_DEFINITION_LIST	{BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,$1, NULL, NULL); gen_labels(parseTree);}
+		| HEADER FUNCTION_DEFINITION_LIST {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,$2, NULL, NULL); gen_labels(parseTree);}
 		;
 
 
@@ -272,5 +217,6 @@ int main(void){
 	#endif
     yyparse();
     printf("%s\n", "No Syntax Errors Detected!");
+	printDataTable();
     return 0;
 };

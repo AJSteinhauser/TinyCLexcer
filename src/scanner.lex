@@ -7,10 +7,12 @@
 	#include "parser.tab.h" // generated via -d
 
 	int lineNum = 1;
-	
+
+	extern char* tokenString;
+	extern int tokenInt;
+	extern float tokenFloat;
 	extern void yyerror(char *msg);
-	//extern SYMBOL_NODE symbol_table[SYMBOL_TABLE_SIZE];
-	//extern int symbolTableSize;
+
 %}
 
 %option noyywrap
@@ -32,9 +34,18 @@
 "while"						{return WHILE;}
 
 [a-zA-Z_]+[a-zA-Z0-9_]*		{return IDENTIFIER;}
-[0-9]+						{return INT_VALUE;}
-[0-9]*\.?[0-9]+				{return FLOAT_VALUE;}
-["].*["]					{return STRING;}
+[0-9]+						{
+								tokenString = strdup(yytext);
+								return INT_VALUE;
+							}
+[0-9]*\.?[0-9]+				{
+								tokenString = strdup(yytext);
+								return FLOAT_VALUE;
+							}
+["].*["]					{
+								tokenString = strdup(yytext);
+								return STRING;
+							}
 "=" 						{return ASSIGNMENT;}
 "=="						{return EQUALS;}
 ">="						{return GREATER_THAN_EQUALS;}

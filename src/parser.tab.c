@@ -144,70 +144,15 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "codeGen.h"
 
 #define YYERROR_VERBOSE 	 1
-#define SYMBOL_TABLE_SIZE 	50
-#define SYMBOL_LENGTH 		15
 
 void yyerror(char *msg);
 extern int yylex();
 extern int lineNum;
 extern char* yytext;
 
-struct treeNode{//Jk i made it trinary instead : )
-	int item;
-	int ident;
-	struct treeNode *left;
-	struct treeNode *middle;
-	struct treeNode *right;
-};
-
-typedef struct treeNode TREE_NODE;
-typedef TREE_NODE *BINARY_TREE;
-
-BINARY_TREE newNode(int, int, BINARY_TREE, BINARY_TREE, BINARY_TREE);
-void print_tree(BINARY_TREE b);
-
-
-struct symbolNode{
-	char identifier[SYMBOL_LENGTH];
-};
-
-typedef struct symbolNode SYMBOL_NODE;
-typedef SYMBOL_NODE *SYMBOL_NODE_PTR;
-
-enum ParseTreeNodeType{
-	PROGRAM = 0, 
-	FUNCTION_DEFINITION_LIST = 1,
-	FUNCTION_DEFINITION = 2,
-	FUNCTION_BODY = 3,
-	FUNCTION_STATEMENT_LIST = 4,
-	VARIABLE_DEFINITION_LIST = 5,
-	VARIABLE_DEFINITION = 6,
-	FUNCTION_PARAMETER_LIST = 7,
-	FUNCTION_PARAMETER = 8,
-	RETURN_TYPE = 9,
-	STATEMENT = 10,
-	EMPTY_STATEMENT = 11,
-	BLOCK_STATEMENT = 12,
-	STATEMENT_LIST = 13,
-	RETURN_STATEMENT = 14,
-	WHILE_STATMENT = 15,
-	IF_STATEMENT = 16,
-	ASSIGNMENT_STATEMENT = 17,
-	EXPRESSION = 18,
-	COMPARISON_EXPRESSION = 19,
-	ADDITIVE_EXPRESSION = 20,
-	MULTIPLICATIVE_EXPRESSION = 21,
-	UNARY_EXPRESSION = 22,
-	FUNCTION_CALL = 23,
-	FUNCTION_ARG_LIST = 24,
-	PRIMARY_EXPRESSION = 25,
-	CONSTANT = 26
-};
-
-SYMBOL_NODE_PTR symbol_table[SYMBOL_TABLE_SIZE];
-int symbolTableSize = 0;
 
 
 
@@ -232,7 +177,7 @@ int symbolTableSize = 0;
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 77 "parser.y"
+#line 22 "parser.y"
 {
     float f;
     int i;
@@ -243,7 +188,7 @@ typedef union YYSTYPE
 	//BINARY_TREE bVal;
 }
 /* Line 193 of yacc.c.  */
-#line 247 "parser.tab.c"
+#line 192 "parser.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -256,7 +201,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 260 "parser.tab.c"
+#line 205 "parser.tab.c"
 
 #ifdef short
 # undef short
@@ -572,14 +517,14 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   111,   111,   112,   113,   114,   117,   118,   119,   120,
-     123,   124,   125,   128,   129,   132,   133,   134,   136,   137,
-     138,   141,   142,   143,   146,   147,   148,   149,   150,   153,
-     154,   155,   158,   159,   162,   163,   166,   169,   170,   173,
-     174,   177,   180,   183,   184,   185,   186,   187,   188,   189,
-     192,   193,   196,   199,   200,   201,   204,   205,   206,   207,
-     210,   211,   214,   215,   216,   219,   222,   223,   226,   227,
-     230,   231,   232,   236,   237
+       0,    56,    56,    57,    58,    59,    62,    63,    64,    65,
+      68,    69,    70,    73,    74,    77,    78,    79,    81,    82,
+      83,    86,    87,    88,    91,    92,    93,    94,    95,    98,
+      99,   100,   103,   104,   107,   108,   111,   114,   115,   118,
+     119,   122,   125,   128,   129,   130,   131,   132,   133,   134,
+     137,   138,   141,   144,   145,   146,   149,   150,   151,   152,
+     155,   156,   159,   160,   161,   164,   167,   168,   171,   172,
+     175,   176,   177,   181,   182
 };
 #endif
 
@@ -1581,333 +1526,333 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 111 "parser.y"
-    {(yyval.bVal) = newNode(-1, CONSTANT, NULL , NULL, NULL);;}
+#line 56 "parser.y"
+    {(yyval.bVal) = newNode(addDataObject_float(yytext), CONSTANT, NULL , NULL, NULL);;}
     break;
 
   case 3:
-#line 112 "parser.y"
-    {(yyval.bVal) = newNode(-1, CONSTANT, NULL , NULL, NULL);;}
+#line 57 "parser.y"
+    {(yyval.bVal) = newNode(addDataObject_str(yytext), CONSTANT, NULL , NULL, NULL); ;}
     break;
 
   case 4:
-#line 113 "parser.y"
+#line 58 "parser.y"
     {(yyval.bVal) = newNode(-1, CONSTANT, NULL , NULL, NULL);;}
     break;
 
   case 5:
-#line 114 "parser.y"
-    {(yyval.bVal) = newNode(-1, CONSTANT, NULL , NULL, NULL);;}
+#line 59 "parser.y"
+    {newNode(addDataObject_int(yytext), CONSTANT, NULL , NULL, NULL);;}
     break;
 
   case 6:
-#line 117 "parser.y"
+#line 62 "parser.y"
     {(yyval.bVal) = newNode(-1, PRIMARY_EXPRESSION, (yyvsp[(1) - (1)].bVal), NULL, NULL);;}
     break;
 
   case 7:
-#line 118 "parser.y"
+#line 63 "parser.y"
     {(yyval.bVal) = newNode(-1, PRIMARY_EXPRESSION, NULL, NULL, NULL);;}
     break;
 
   case 8:
-#line 119 "parser.y"
+#line 64 "parser.y"
     {(yyval.bVal) = newNode(-1, PRIMARY_EXPRESSION, (yyvsp[(1) - (1)].bVal), NULL, NULL);;}
     break;
 
   case 9:
-#line 120 "parser.y"
+#line 65 "parser.y"
     {(yyval.bVal) = newNode(-1, PRIMARY_EXPRESSION, (yyvsp[(2) - (3)].bVal), NULL, NULL);;}
     break;
 
   case 10:
-#line 123 "parser.y"
+#line 68 "parser.y"
     {(yyval.bVal) = newNode(-1, FUNCTION_ARG_LIST, NULL, NULL, NULL);;}
     break;
 
   case 11:
-#line 124 "parser.y"
+#line 69 "parser.y"
     {(yyval.bVal) = newNode(-1, FUNCTION_ARG_LIST, (yyvsp[(1) - (1)].bVal), NULL, NULL);;}
     break;
 
   case 12:
-#line 125 "parser.y"
+#line 70 "parser.y"
     {(yyval.bVal) = newNode(-1, FUNCTION_ARG_LIST, (yyvsp[(1) - (3)].bVal), (yyvsp[(3) - (3)].bVal), NULL );;}
     break;
 
   case 13:
-#line 128 "parser.y"
+#line 73 "parser.y"
     {(yyval.bVal) = newNode(-1, FUNCTION_CALL, (yyvsp[(3) - (4)].bVal),NULL,NULL);;}
     break;
 
   case 14:
-#line 129 "parser.y"
+#line 74 "parser.y"
     {(yyval.bVal) = newNode(-1, FUNCTION_CALL, NULL, NULL, NULL);;}
     break;
 
   case 15:
-#line 132 "parser.y"
+#line 77 "parser.y"
     {(yyval.bVal) = newNode(0, UNARY_EXPRESSION, (yyvsp[(1) - (1)].bVal), NULL, NULL);;}
     break;
 
   case 16:
-#line 133 "parser.y"
+#line 78 "parser.y"
     {(yyval.bVal) = newNode(1, UNARY_EXPRESSION, (yyvsp[(2) - (2)].bVal), NULL, NULL);;}
     break;
 
   case 17:
-#line 134 "parser.y"
+#line 79 "parser.y"
     {(yyval.bVal) = newNode(2, UNARY_EXPRESSION, (yyvsp[(2) - (2)].bVal), NULL,NULL);;}
     break;
 
   case 18:
-#line 136 "parser.y"
+#line 81 "parser.y"
     {(yyval.bVal) = newNode(0, MULTIPLICATIVE_EXPRESSION, (yyvsp[(1) - (1)].bVal), NULL, NULL);;}
     break;
 
   case 19:
-#line 137 "parser.y"
+#line 82 "parser.y"
     {(yyval.bVal) = newNode(1, MULTIPLICATIVE_EXPRESSION, (yyvsp[(1) - (3)].bVal), (yyvsp[(3) - (3)].bVal),NULL);;}
     break;
 
   case 20:
-#line 138 "parser.y"
+#line 83 "parser.y"
     {(yyval.bVal) = newNode(2, MULTIPLICATIVE_EXPRESSION, (yyvsp[(1) - (3)].bVal), (yyvsp[(3) - (3)].bVal),NULL);;}
     break;
 
   case 21:
-#line 141 "parser.y"
+#line 86 "parser.y"
     {(yyval.bVal) = newNode(0, ADDITIVE_EXPRESSION, (yyvsp[(1) - (1)].bVal), NULL,NULL);;}
     break;
 
   case 22:
-#line 142 "parser.y"
+#line 87 "parser.y"
     {(yyval.bVal) = newNode(1, ADDITIVE_EXPRESSION, (yyvsp[(1) - (3)].bVal), (yyvsp[(3) - (3)].bVal), NULL);;}
     break;
 
   case 23:
-#line 143 "parser.y"
+#line 88 "parser.y"
     {(yyval.bVal) = newNode(2, ADDITIVE_EXPRESSION, (yyvsp[(1) - (3)].bVal), (yyvsp[(3) - (3)].bVal), NULL);;}
     break;
 
   case 24:
-#line 146 "parser.y"
+#line 91 "parser.y"
     {(yyval.bVal) = newNode(0, COMPARISON_EXPRESSION, (yyvsp[(1) - (1)].bVal), NULL,NULL);;}
     break;
 
   case 25:
-#line 147 "parser.y"
+#line 92 "parser.y"
     {(yyval.bVal) = newNode(1, COMPARISON_EXPRESSION, (yyvsp[(1) - (3)].bVal), (yyvsp[(3) - (3)].bVal),NULL);;}
     break;
 
   case 26:
-#line 148 "parser.y"
+#line 93 "parser.y"
     {(yyval.bVal) = newNode(2, COMPARISON_EXPRESSION, (yyvsp[(1) - (3)].bVal), (yyvsp[(3) - (3)].bVal),NULL);;}
     break;
 
   case 27:
-#line 149 "parser.y"
+#line 94 "parser.y"
     {(yyval.bVal) = newNode(3, COMPARISON_EXPRESSION, (yyvsp[(1) - (3)].bVal), (yyvsp[(3) - (3)].bVal),NULL);;}
     break;
 
   case 28:
-#line 150 "parser.y"
+#line 95 "parser.y"
     {(yyval.bVal) = newNode(4, COMPARISON_EXPRESSION, (yyvsp[(1) - (3)].bVal), (yyvsp[(3) - (3)].bVal),NULL);;}
     break;
 
   case 29:
-#line 153 "parser.y"
+#line 98 "parser.y"
     {(yyval.bVal) = newNode(0, EXPRESSION, (yyvsp[(1) - (1)].bVal), NULL,NULL);;}
     break;
 
   case 30:
-#line 154 "parser.y"
+#line 99 "parser.y"
     {(yyval.bVal) = newNode(1, EXPRESSION, (yyvsp[(1) - (3)].bVal), (yyvsp[(3) - (3)].bVal),NULL);;}
     break;
 
   case 31:
-#line 155 "parser.y"
+#line 100 "parser.y"
     {(yyval.bVal) = newNode(2, EXPRESSION, (yyvsp[(1) - (3)].bVal), (yyvsp[(3) - (3)].bVal) ,NULL);;}
     break;
 
   case 32:
-#line 158 "parser.y"
+#line 103 "parser.y"
     {(yyval.bVal) = newNode(-1, ASSIGNMENT_STATEMENT, (yyvsp[(3) - (4)].bVal),NULL,NULL);;}
     break;
 
   case 33:
-#line 159 "parser.y"
+#line 104 "parser.y"
     {(yyval.bVal) = newNode(-1, ASSIGNMENT_STATEMENT,(yyvsp[(4) - (5)].bVal),NULL,NULL);;}
     break;
 
   case 34:
-#line 162 "parser.y"
+#line 107 "parser.y"
     {(yyval.bVal) = newNode(-1, IF_STATEMENT, (yyvsp[(3) - (5)].bVal), (yyvsp[(5) - (5)].bVal),NULL);;}
     break;
 
   case 35:
-#line 163 "parser.y"
+#line 108 "parser.y"
     {(yyval.bVal) = newNode(-1, IF_STATEMENT, (yyvsp[(3) - (7)].bVal), (yyvsp[(5) - (7)].bVal), (yyvsp[(7) - (7)].bVal));;}
     break;
 
   case 36:
-#line 166 "parser.y"
+#line 111 "parser.y"
     {(yyval.bVal) = newNode(-1, WHILE_STATMENT, (yyvsp[(3) - (5)].bVal), (yyvsp[(5) - (5)].bVal),NULL);;}
     break;
 
   case 37:
-#line 169 "parser.y"
+#line 114 "parser.y"
     {(yyval.bVal) = newNode(-1, RETURN_STATEMENT, NULL,NULL,NULL);;}
     break;
 
   case 38:
-#line 170 "parser.y"
+#line 115 "parser.y"
     {(yyval.bVal) = newNode(-1, RETURN_STATEMENT, (yyvsp[(2) - (3)].bVal),NULL,NULL);;}
     break;
 
   case 40:
-#line 174 "parser.y"
+#line 119 "parser.y"
     {(yyval.bVal) = newNode(-1, STATEMENT_LIST, (yyvsp[(1) - (2)].bVal),(yyvsp[(2) - (2)].bVal),NULL);;}
     break;
 
   case 41:
-#line 177 "parser.y"
+#line 122 "parser.y"
     {(yyval.bVal) = newNode(-1, BLOCK_STATEMENT, (yyvsp[(2) - (3)].bVal),NULL,NULL);;}
     break;
 
   case 42:
-#line 180 "parser.y"
+#line 125 "parser.y"
     {(yyval.bVal) = newNode(-1, EMPTY_STATEMENT, NULL,NULL,NULL);;}
     break;
 
   case 43:
-#line 183 "parser.y"
+#line 128 "parser.y"
     {(yyval.bVal) = newNode(-1, STATEMENT,(yyvsp[(1) - (1)].bVal),NULL,NULL);;}
     break;
 
   case 44:
-#line 184 "parser.y"
+#line 129 "parser.y"
     {(yyval.bVal) = newNode(-1, STATEMENT,(yyvsp[(1) - (1)].bVal),NULL,NULL);;}
     break;
 
   case 45:
-#line 185 "parser.y"
+#line 130 "parser.y"
     {(yyval.bVal) = newNode(-1, STATEMENT,(yyvsp[(1) - (1)].bVal),NULL,NULL);;}
     break;
 
   case 46:
-#line 186 "parser.y"
+#line 131 "parser.y"
     {(yyval.bVal) = newNode(-1, STATEMENT,(yyvsp[(1) - (1)].bVal),NULL,NULL);;}
     break;
 
   case 47:
-#line 187 "parser.y"
+#line 132 "parser.y"
     {(yyval.bVal) = newNode(-1, STATEMENT,(yyvsp[(1) - (1)].bVal),NULL,NULL);;}
     break;
 
   case 48:
-#line 188 "parser.y"
+#line 133 "parser.y"
     {(yyval.bVal) = newNode(-1, STATEMENT,(yyvsp[(1) - (1)].bVal),NULL,NULL);;}
     break;
 
   case 49:
-#line 189 "parser.y"
+#line 134 "parser.y"
     {(yyval.bVal) = newNode(-1, STATEMENT,(yyvsp[(1) - (1)].bVal),NULL,NULL);;}
     break;
 
   case 50:
-#line 192 "parser.y"
+#line 137 "parser.y"
     {(yyval.bVal) = newNode(-1, RETURN_TYPE,NULL,NULL,NULL);;}
     break;
 
   case 51:
-#line 193 "parser.y"
+#line 138 "parser.y"
     {(yyval.bVal) = newNode(-1, RETURN_TYPE,NULL,NULL,NULL);;}
     break;
 
   case 52:
-#line 196 "parser.y"
+#line 141 "parser.y"
     {(yyval.bVal) = newNode(-1, FUNCTION_PARAMETER,NULL,NULL,NULL);;}
     break;
 
   case 54:
-#line 200 "parser.y"
+#line 145 "parser.y"
     {(yyval.bVal) = newNode(-1, FUNCTION_PARAMETER_LIST,(yyvsp[(1) - (1)].bVal),NULL,NULL);;}
     break;
 
   case 55:
-#line 201 "parser.y"
+#line 146 "parser.y"
     {(yyval.bVal) = newNode(-1, FUNCTION_PARAMETER_LIST,(yyvsp[(1) - (3)].bVal),(yyvsp[(3) - (3)].bVal),NULL);;}
     break;
 
   case 56:
-#line 204 "parser.y"
+#line 149 "parser.y"
     {(yyval.bVal) = newNode(-1, VARIABLE_DEFINITION,NULL,NULL,NULL);;}
     break;
 
   case 57:
-#line 205 "parser.y"
+#line 150 "parser.y"
     {(yyval.bVal) = newNode(-1, VARIABLE_DEFINITION,NULL,NULL,NULL);;}
     break;
 
   case 58:
-#line 206 "parser.y"
+#line 151 "parser.y"
     {(yyval.bVal) = newNode(-1, VARIABLE_DEFINITION,NULL,NULL,NULL);;}
     break;
 
   case 59:
-#line 207 "parser.y"
+#line 152 "parser.y"
     {(yyval.bVal) = newNode(-1, VARIABLE_DEFINITION,(yyvsp[(1) - (1)].bVal),NULL, NULL);;}
     break;
 
   case 61:
-#line 211 "parser.y"
+#line 156 "parser.y"
     {(yyval.bVal) = newNode(-1, VARIABLE_DEFINITION_LIST,(yyvsp[(1) - (2)].bVal),(yyvsp[(2) - (2)].bVal), NULL);;}
     break;
 
   case 63:
-#line 215 "parser.y"
+#line 160 "parser.y"
     {(yyval.bVal) = newNode(-1, FUNCTION_STATEMENT_LIST,(yyvsp[(1) - (1)].bVal),NULL, NULL);;}
     break;
 
   case 64:
-#line 216 "parser.y"
+#line 161 "parser.y"
     {(yyval.bVal) = newNode(-1, FUNCTION_STATEMENT_LIST,(yyvsp[(1) - (2)].bVal),(yyvsp[(2) - (2)].bVal), NULL);;}
     break;
 
   case 65:
-#line 219 "parser.y"
+#line 164 "parser.y"
     {(yyval.bVal) = newNode(-1, FUNCTION_BODY,(yyvsp[(2) - (4)].bVal),(yyvsp[(3) - (4)].bVal),NULL);;}
     break;
 
   case 66:
-#line 222 "parser.y"
+#line 167 "parser.y"
     {(yyval.bVal) = newNode(-1, FUNCTION_DEFINITION,(yyvsp[(4) - (6)].bVal),(yyvsp[(6) - (6)].bVal),NULL);;}
     break;
 
   case 67:
-#line 223 "parser.y"
+#line 168 "parser.y"
     {(yyval.bVal) = newNode(-1, FUNCTION_DEFINITION,NULL,(yyvsp[(6) - (6)].bVal), NULL);;}
     break;
 
   case 69:
-#line 227 "parser.y"
-    {(yyval.bVal) = newNode(-1, FUNCTION_DEFINITION_LIST,(yyvsp[(1) - (2)].bVal),(yyvsp[(2) - (2)].bVal), NULL);}
+#line 172 "parser.y"
+    {(yyval.bVal) = newNode(-1, FUNCTION_DEFINITION_LIST,(yyvsp[(1) - (2)].bVal),(yyvsp[(2) - (2)].bVal), NULL);;}
     break;
 
   case 73:
-#line 236 "parser.y"
-    {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,(yyvsp[(1) - (1)].bVal), NULL, NULL); print_tree(parseTree);;}
+#line 181 "parser.y"
+    {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,(yyvsp[(1) - (1)].bVal), NULL, NULL); gen_labels(parseTree);;}
     break;
 
   case 74:
-#line 237 "parser.y"
-    {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,(yyvsp[(2) - (2)].bVal), NULL, NULL); print_tree(parseTree);;}
+#line 182 "parser.y"
+    {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,(yyvsp[(2) - (2)].bVal), NULL, NULL); gen_labels(parseTree);;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1911 "parser.tab.c"
+#line 1856 "parser.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2121,7 +2066,7 @@ yyreturn:
 }
 
 
-#line 242 "parser.y"
+#line 187 "parser.y"
 
 
 BINARY_TREE newNode(int iValue, int identifier, BINARY_TREE b1, BINARY_TREE b2, BINARY_TREE b3){
@@ -2155,5 +2100,6 @@ int main(void){
 	#endif
     yyparse();
     printf("%s\n", "No Syntax Errors Detected!");
+	printDataTable();
     return 0;
 };
