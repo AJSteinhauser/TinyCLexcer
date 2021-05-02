@@ -14,9 +14,13 @@ void gen_function(BINARY_TREE node){
     printf("Generating function...");
 }
 
+
 void parseThrough(BINARY_TREE root){
     if (root == NULL){return;}
-
+    //printf("%d", root->ident);
+    //if (root->ident == FUNCTION_DEFINITION){
+   //     gen_function(root);
+    //}
     parseThrough(root->right);
     parseThrough(root->middle);
     parseThrough(root->left);
@@ -24,7 +28,7 @@ void parseThrough(BINARY_TREE root){
 
 void gen_everything(BINARY_TREE root){
     gen_inital();
-    
+    parseThrough(root);
 	gen_labels();
 }
 

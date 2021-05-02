@@ -8,6 +8,13 @@ bison:
 	cd src && bison --report=state -t -d parser.y 
 	gcc src/lex.yy.c src/parser.tab.c -o bin/bison.out
 
+debug:
+	make clean
+	mkdir -p bin
+	lex -o src/lex.yy.c src/scanner.lex
+	cd src && bison --report=state -t -d parser.y 
+	gcc -g src/lex.yy.c src/parser.tab.c -o bin/bison.out
+
 
 lex:
 	make clean 
