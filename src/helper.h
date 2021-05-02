@@ -26,7 +26,7 @@ void print_tree(BINARY_TREE b);
 
 
 struct symbolNode{
-	const char* identifier;
+	char identifier[SYMBOL_LENGTH];
 };
 
 typedef struct symbolNode SYMBOL_NODE;
@@ -46,28 +46,6 @@ typedef DATANODE *DATA_NODE_PTR;
 
 DATA_NODE_PTR data_table[SYMBOL_TABLE_SIZE];
 int dataTableSize = 0;
-
-int getSymbol(const char* id){
-	for (int i = 0; i < SYMBOL_TABLE_SIZE; i++){
-		if (strcmp(symbol_table[i]->identifier,id) == 1){
-			return i;
-		}
-	}
-	return -1;
-}
-
-int addSymbol(char* id){
-	symbol_table[symbolTableSize] = (SYMBOL_NODE_PTR)malloc(sizeof(SYMBOL_NODE_PTR)); 
-	symbol_table[symbolTableSize]->identifier = id;
-	symbolTableSize++;
-	return symbolTableSize - 1;
-}
-
-void printAllSymbols(){
-	for (int i = 0; i < symbolTableSize; i++){
-		printf("%s\n",symbol_table[i]->identifier);
-	}
-}
 
 int addDataObject_str(char* obj){
     data_table[dataTableSize] = (DATA_NODE_PTR)malloc(sizeof(DATA_NODE_PTR)); 
