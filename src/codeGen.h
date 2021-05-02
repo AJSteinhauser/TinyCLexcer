@@ -4,6 +4,37 @@
 #include "helper.h"
 
 
+void gen_labels();
+
+void gen_inital(){
+    char* header = "global _main\n\nsection .text:\n";
+     printf("%s",header);
+}
+
+void gen_function(BINARY_TREE node){
+    printf("_%s\n", symbol_table[node->item]->identifier);
+}
+
+
+void parseThrough(BINARY_TREE root){
+    if (root == NULL){return;}
+    if (root->ident == FUNCTION_DEFINITION){
+        gen_function(root);
+    }
+    parseThrough(root->right);
+    parseThrough(root->middle);
+    parseThrough(root->left);
+}
+
+void gen_everything(BINARY_TREE root){
+    gen_inital();
+    parseThrough(root);
+	gen_labels();
+}
+
+void gen_returnStatement(){
+    char* commands = "mov eax, 0x1\nmov ebx, 0\nint 0x80";
+}
 
 
 void gen_labels(){

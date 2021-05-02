@@ -1,6 +1,7 @@
 {
     "files.associations": {
-        "*.y": "cpp"
+        "*.y": "cpp",
+        "locale": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
