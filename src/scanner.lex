@@ -33,17 +33,24 @@
 "else"						{return ELSE;}
 "while"						{return WHILE;}
 
-[a-zA-Z_]+[a-zA-Z0-9_]*		{return IDENTIFIER;}
+[a-zA-Z_]+[a-zA-Z0-9_]*		{
+								tokenString = strdup(yytext);
+								yylval.ident = strdup(yytext);
+								return IDENTIFIER;
+							}
 [0-9]+						{
 								tokenString = strdup(yytext);
+								yylval.ident = strdup(yytext);
 								return INT_VALUE;
 							}
 [0-9]*\.?[0-9]+				{
 								tokenString = strdup(yytext);
+								yylval.ident = strdup(yytext);
 								return FLOAT_VALUE;
 							}
 ["].*["]					{
 								tokenString = strdup(yytext);
+								yylval.ident = strdup(yytext);
 								return STRING;
 							}
 "=" 						{return ASSIGNMENT;}

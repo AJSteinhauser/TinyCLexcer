@@ -1827,12 +1827,12 @@ yyreduce:
 
   case 66:
 #line 167 "parser.y"
-    {(yyval.bVal) = newNode(-1, FUNCTION_DEFINITION,(yyvsp[(4) - (6)].bVal),(yyvsp[(6) - (6)].bVal),NULL);;}
+    {printf("%s",(yyvsp[(2) - (6)].ident)); (yyval.bVal) = newNode(-1, FUNCTION_DEFINITION,(yyvsp[(4) - (6)].bVal),(yyvsp[(6) - (6)].bVal),NULL);;}
     break;
 
   case 67:
 #line 168 "parser.y"
-    {(yyval.bVal) = newNode(-1, FUNCTION_DEFINITION,NULL,(yyvsp[(6) - (6)].bVal), NULL);;}
+    {printf("%s",(yyvsp[(2) - (6)].ident)); (yyval.bVal) = newNode(-1, FUNCTION_DEFINITION,NULL,(yyvsp[(6) - (6)].bVal), NULL);;}
     break;
 
   case 69:
@@ -1842,12 +1842,12 @@ yyreduce:
 
   case 73:
 #line 181 "parser.y"
-    {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,(yyvsp[(1) - (1)].bVal), NULL, NULL); ;}
+    {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,(yyvsp[(1) - (1)].bVal), NULL, NULL); gen_everything(parseTree); ;}
     break;
 
   case 74:
 #line 182 "parser.y"
-    {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,(yyvsp[(2) - (2)].bVal), NULL, NULL);;}
+    {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,(yyvsp[(2) - (2)].bVal), NULL, NULL); gen_everything(parseTree);;}
     break;
 
 
@@ -2100,6 +2100,5 @@ int main(void){
 	#endif
     yyparse();
     printf("%s\n", "No Syntax Errors Detected!");
-	gen_labels();
     return 0;
 };
