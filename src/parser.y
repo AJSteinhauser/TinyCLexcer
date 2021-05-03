@@ -164,8 +164,8 @@ FUNCTION_STATEMENT_LIST :
 FUNCTION_BODY : OPEN_BRACKET VARIABLE_DEFINITION_LIST FUNCTION_STATEMENT_LIST CLOSE_BRACKET {$$ = newNode(-1, FUNCTION_BODY,$2,$3,NULL);}
 			  ;
 
-FUNCTION_DEFINITION : RETURN_TYPE IDENTIFIER OPEN_PAR FUNCTION_PARAMETER_LIST CLOSE_PAR  FUNCTION_BODY {$$ = newNode(-1, FUNCTION_DEFINITION,$4,$6,NULL); printf("%s\tTESTING\n",yylval.ident);}
-					| RETURN_TYPE IDENTIFIER OPEN_PAR VOID CLOSE_PAR FUNCTION_BODY {$$ = newNode(-1, FUNCTION_DEFINITION,NULL,$6, NULL); printf("%s\tTESTING, %s\n",yylval.ident, $2);}
+FUNCTION_DEFINITION : RETURN_TYPE IDENTIFIER OPEN_PAR FUNCTION_PARAMETER_LIST CLOSE_PAR  FUNCTION_BODY {$$ = newNode(-1, FUNCTION_DEFINITION,$4,$6,NULL);}
+					| RETURN_TYPE IDENTIFIER OPEN_PAR VOID CLOSE_PAR FUNCTION_BODY {$$ = newNode(-1, FUNCTION_DEFINITION,NULL,$6, NULL);}
 					;
 
 FUNCTION_DEFINITION_LIST : 
@@ -178,8 +178,8 @@ HEADER : HASHTAG INCLUDE LEFT_TRI IDENTIFIER PERIOD IDENTIFIER RIGHT_TRI
 	   ;
 
 
-PROGRAM	: FUNCTION_DEFINITION_LIST	{BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,$1, NULL, NULL); print_tree(parseTree); }
-		| HEADER FUNCTION_DEFINITION_LIST {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,$2, NULL, NULL); print_tree(parseTree);}
+PROGRAM	: FUNCTION_DEFINITION_LIST	{BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,$1, NULL, NULL); gen_everything(parseTree); }
+		| HEADER FUNCTION_DEFINITION_LIST {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,$2, NULL, NULL); gen_everything(parseTree);}
 		;
 
 
@@ -201,7 +201,6 @@ BINARY_TREE newNode(int iValue, int identifier, BINARY_TREE b1, BINARY_TREE b2, 
 void print_tree(BINARY_TREE b){
 	if (b == NULL) return;
 	printf("Item %d ", b->item);
-	printf("Node identifier: %d\n", b->ident);
 	print_tree(b->right);
 	print_tree(b->middle);
 	print_tree(b->left);
@@ -217,7 +216,7 @@ int main(void){
 	  //yydebug = 1;
 	#endif
     yyparse();
-    printf("%s\n", "No Syntax Errors Detected!");
+    printf("%s\n", ";No Syntax Errors Detected!");
 	//printAllSymbols();
     return 0;
 };

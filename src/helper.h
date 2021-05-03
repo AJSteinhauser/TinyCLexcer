@@ -48,11 +48,10 @@ DATA_NODE_PTR data_table[SYMBOL_TABLE_SIZE];
 int dataTableSize = 0;
 
 int addSymbol(char* obj){
-	 //symbol_table[symbolTableSize] = (SYMBOL_NODE_PTR)malloc(sizeof(SYMBOL_NODE_PTR)); 
-	// symbol_table[symbolTableSize]->identifier = obj;
-	//printf("%s",obj);
-	 symbolTableSize++;
-	 return symbolTableSize-1;
+	symbol_table[symbolTableSize] = (SYMBOL_NODE_PTR)malloc(sizeof(SYMBOL_NODE_PTR)); 
+	symbol_table[symbolTableSize]->identifier = obj;
+	symbolTableSize++;
+	return symbolTableSize-1;
 }
 
 void printAllSymbols(){
