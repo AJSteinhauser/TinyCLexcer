@@ -33,8 +33,13 @@
 "else"						{return ELSE;}
 "while"						{return WHILE;}
 
-[a-zA-Z_]+[a-zA-Z0-9_]*		{return IDENTIFIER;}
-[0-9]+						{
+[a-zA-Z_]+[a-zA-Z0-9_]*		{	
+								
+								yylval.ident = strdup(yytext);
+								printf("%s\n",yylval.ident);
+								yylval.ident = tokenString;
+								return IDENTIFIER;}
+[0-9]+						{	
 								tokenString = strdup(yytext);
 								return INT_VALUE;
 							}

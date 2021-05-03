@@ -1827,12 +1827,12 @@ yyreduce:
 
   case 66:
 #line 167 "parser.y"
-    {(yyval.bVal) = newNode(addSymbol((yyvsp[(2) - (6)].ident)), FUNCTION_DEFINITION,(yyvsp[(4) - (6)].bVal),(yyvsp[(6) - (6)].bVal),NULL); printf("%s",(yyvsp[(2) - (6)].ident));;}
+    {(yyval.bVal) = newNode(addSymbol((yyvsp[(2) - (6)].ident)), FUNCTION_DEFINITION,(yyvsp[(4) - (6)].bVal),(yyvsp[(6) - (6)].bVal),NULL); printf("%s\tTESTING\n",yylval.ident);}
     break;
 
   case 67:
 #line 168 "parser.y"
-    {(yyval.bVal) = newNode(addSymbol((yyvsp[(2) - (6)].ident)), FUNCTION_DEFINITION,NULL,(yyvsp[(6) - (6)].bVal), NULL); printf("%s",(yyvsp[(2) - (6)].ident));;}
+    {(yyval.bVal) = newNode(addSymbol((yyvsp[(2) - (6)].ident)), FUNCTION_DEFINITION,NULL,(yyvsp[(6) - (6)].bVal), NULL); printf("%s\tTESTING, %s\n",yylval.ident, (yyvsp[(2) - (6)].ident));}
     break;
 
   case 69:
