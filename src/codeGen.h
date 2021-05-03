@@ -18,18 +18,13 @@ void gen_function(BINARY_TREE node){
 
 void parseThrough(BINARY_TREE root){
     if (root == NULL){return;}
-    //if (root->ident == FUNCTION_DEFINITION){
-    //    gen_function(root);
-   // }
-    if (root->right != NULL){
-        parseThrough(root->right);
+    if (root->ident == FUNCTION_DEFINITION){
+        gen_function(root);
     }
-    if (root->middle != NULL){
-        parseThrough(root->middle);
-    }
-    if (root->left != NULL){
-        parseThrough(root->left);
-    }
+    printf("L:%s\nR:%s\nM:%s\n", root->left,root->right,root->middle);
+    parseThrough(root->left);
+    parseThrough(root->middle);
+    parseThrough(root->right);
 }
 
 void gen_everything(BINARY_TREE root){

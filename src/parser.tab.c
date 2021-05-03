@@ -1827,12 +1827,12 @@ yyreduce:
 
   case 66:
 #line 167 "parser.y"
-    {(yyval.bVal) = newNode(addSymbol((yyvsp[(2) - (6)].ident)), FUNCTION_DEFINITION,(yyvsp[(4) - (6)].bVal),(yyvsp[(6) - (6)].bVal),NULL); printf("%s\tTESTING\n",yylval.ident);;}
+    {(yyval.bVal) = newNode(-1, FUNCTION_DEFINITION,(yyvsp[(4) - (6)].bVal),(yyvsp[(6) - (6)].bVal),NULL); printf("%s\tTESTING\n",yylval.ident);;}
     break;
 
   case 67:
 #line 168 "parser.y"
-    {(yyval.bVal) = newNode(addSymbol((yyvsp[(2) - (6)].ident)), FUNCTION_DEFINITION,NULL,(yyvsp[(6) - (6)].bVal), NULL); printf("%s\tTESTING, %s\n",yylval.ident, (yyvsp[(2) - (6)].ident));;}
+    {(yyval.bVal) = newNode(-1, FUNCTION_DEFINITION,NULL,(yyvsp[(6) - (6)].bVal), NULL); printf("%s\tTESTING, %s\n",yylval.ident, (yyvsp[(2) - (6)].ident));;}
     break;
 
   case 69:
@@ -1842,12 +1842,12 @@ yyreduce:
 
   case 73:
 #line 181 "parser.y"
-    {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,(yyvsp[(1) - (1)].bVal), NULL, NULL);  ;}
+    {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,(yyvsp[(1) - (1)].bVal), NULL, NULL); print_tree(parseTree); ;}
     break;
 
   case 74:
 #line 182 "parser.y"
-    {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,(yyvsp[(2) - (2)].bVal), NULL, NULL); gen_everything(parseTree);;}
+    {BINARY_TREE parseTree; parseTree = newNode(-1,PROGRAM,(yyvsp[(2) - (2)].bVal), NULL, NULL); print_tree(parseTree);;}
     break;
 
 
@@ -2077,6 +2077,7 @@ BINARY_TREE newNode(int iValue, int identifier, BINARY_TREE b1, BINARY_TREE b2, 
 	n->left = b1;
 	n->middle = b2;
 	n->right = b3;
+	
 	return n;
 }
 
