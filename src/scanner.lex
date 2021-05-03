@@ -36,8 +36,8 @@
 [a-zA-Z_]+[a-zA-Z0-9_]*		{	
 								
 								yylval.ident = strdup(yytext);
-								printf("%s\n",yylval.ident);
-								yylval.ident = tokenString;
+								//yylval.ident = tokenString;
+								tokenString = yylval.ident;
 								return IDENTIFIER;}
 [0-9]+						{	
 								tokenString = strdup(yytext);

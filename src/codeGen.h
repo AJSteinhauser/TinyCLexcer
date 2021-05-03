@@ -18,9 +18,9 @@ void gen_function(BINARY_TREE node){
 
 void parseThrough(BINARY_TREE root){
     if (root == NULL){return;}
-    if (root->ident == FUNCTION_DEFINITION){
-        gen_function(root);
-    }
+    //if (root->ident == FUNCTION_DEFINITION){
+    //    gen_function(root);
+   // }
     parseThrough(root->right);
     parseThrough(root->middle);
     parseThrough(root->left);

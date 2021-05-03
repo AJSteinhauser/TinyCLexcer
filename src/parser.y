@@ -165,7 +165,7 @@ FUNCTION_BODY : OPEN_BRACKET VARIABLE_DEFINITION_LIST FUNCTION_STATEMENT_LIST CL
 			  ;
 
 FUNCTION_DEFINITION : RETURN_TYPE IDENTIFIER OPEN_PAR FUNCTION_PARAMETER_LIST CLOSE_PAR  FUNCTION_BODY {$$ = newNode(addSymbol($2), FUNCTION_DEFINITION,$4,$6,NULL); printf("%s\tTESTING\n",yylval.ident);}
-| RETURN_TYPE IDENTIFIER OPEN_PAR VOID CLOSE_PAR FUNCTION_BODY {$$ = newNode(addSymbol($2), FUNCTION_DEFINITION,NULL,$6, NULL); printf("%s\tTESTING, %s\n",yylval.ident, $2);}
+					| RETURN_TYPE IDENTIFIER OPEN_PAR VOID CLOSE_PAR FUNCTION_BODY {$$ = newNode(addSymbol($2), FUNCTION_DEFINITION,NULL,$6, NULL); printf("%s\tTESTING, %s\n",yylval.ident, $2);}
 					;
 
 FUNCTION_DEFINITION_LIST : 
@@ -217,6 +217,6 @@ int main(void){
 	#endif
     yyparse();
     printf("%s\n", "No Syntax Errors Detected!");
-	printAllSymbols();
+	//printAllSymbols();
     return 0;
 };
