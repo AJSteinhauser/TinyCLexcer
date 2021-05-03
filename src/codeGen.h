@@ -21,9 +21,15 @@ void parseThrough(BINARY_TREE root){
     //if (root->ident == FUNCTION_DEFINITION){
     //    gen_function(root);
    // }
-    parseThrough(root->right);
-    parseThrough(root->middle);
-    parseThrough(root->left);
+    if (root->right != NULL){
+        parseThrough(root->right);
+    }
+    if (root->middle != NULL){
+        parseThrough(root->middle);
+    }
+    if (root->left != NULL){
+        parseThrough(root->left);
+    }
 }
 
 void gen_everything(BINARY_TREE root){
