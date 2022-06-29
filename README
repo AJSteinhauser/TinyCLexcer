@@ -1,16 +1,6 @@
 
 # Project 3 
-   I give up... I've been trying to get this program for a very long time, easily spent 6+ hours just googling and trying to find
-   resources and much more trying get the dang thing to work. I have never programmed in C (much less x86_64) until this project and 
-   only this 3rd part had any substantial amount of C code. 
 
-   Over the course of this final project I deleted everything and restarted it 3 times because of seemingly incurable SEGFAULTS. The version 
-   of the project only outputs headers and labels, any other attempts at code generation leads to SEGFAULTS and no output given so this 
-   seemed like the best option.
-
-   I knew going into this that I'd be aiming for partial credit but I'm disppointed about how small of a % I will be getting. Couldn't really get 
-   very far into code generation because of all the problems I was having with not knowing the language I was programming in as well as not 
-   knowing the language I was generating.
 
    To compile code
       make
